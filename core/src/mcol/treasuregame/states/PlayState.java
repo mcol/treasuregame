@@ -185,10 +185,8 @@ public class PlayState extends State {
     }
 
     /** Drops a bomb. */
-    private void dropBomb(float x, float y) {
-        if (map.getFog().getCell((int) x, (int) y) != null)
-            return;
-        items.add(new ArmedBomb(x, y));
+    private void dropBomb() {
+        items.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
         hud.setBombs();
         hud.resetCheckedButton();
@@ -230,6 +228,8 @@ public class PlayState extends State {
     @Override
     protected void update(float dt) {
         handleInput();
+        if (hud.isHoldingBomb())
+            dropBomb();
         if (hud.isHoldingLamb())
             releaseLamb(player.getTileX(), player.getTileY());
 
@@ -302,11 +302,6 @@ public class PlayState extends State {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Vector3 coords = new Vector3(screenX, screenY, 0);
         viewport.unproject(coords);
-
-        if (hud.isHoldingBomb()) {
-            dropBomb(coords.x, coords.y);
-            return false;
-        }
 
         // transform screen coordinates to world coordinates
         player.findPathToTarget(map.getObstacles(), coords);
