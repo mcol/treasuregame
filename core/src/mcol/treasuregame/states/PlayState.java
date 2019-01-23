@@ -196,7 +196,7 @@ public class PlayState extends State {
     private void explodeBomb(Item item) {
         int radius = 7;
         int tx = (int) item.getX() / TreasureGame.TILESIZE - radius / 2;
-        int ty = (int) item.getY() / TreasureGame.TILESIZE - radius / 2 + 1;
+        int ty = (int) item.getY() / TreasureGame.TILESIZE - radius / 2;
         items.add(new Explosion(tx, ty, radius));
         map.destroyFog(tx, ty, radius);
         map.destroyObstacles(tx, ty, radius);
