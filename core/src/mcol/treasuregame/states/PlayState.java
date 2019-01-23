@@ -46,10 +46,10 @@ public class PlayState extends State {
     /** Heads-up display. */
     private HUD hud;
 
-    /** Height of the world in pixels. */
+    /** Height of the world in world units. */
     private int worldWidth;
 
-    /** Width of the world in pixels. */
+    /** Width of the world in world units. */
     private int worldHeight;
 
     /** Container for all items. */
@@ -74,8 +74,8 @@ public class PlayState extends State {
     /** Initializes the world. */
     private void initializeWorld(int level) {
         map = new Map(sb, level);
-        worldWidth = map.getHeight() * TreasureGame.TILESIZE;
-        worldHeight = map.getWidth() * TreasureGame.TILESIZE;
+        worldWidth = map.getHeight();
+        worldHeight = map.getWidth();
         items = new ArrayList<Item>();
         creatures = new ArrayList<Creature>();
         creatures.add(player);

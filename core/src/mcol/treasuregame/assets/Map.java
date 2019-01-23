@@ -164,13 +164,13 @@ public class Map {
         return fog;
     }
 
-    /** Returns the width of the map in tiles. */
+    /** Returns the width of the map in world units. */
     public int getWidth() {
-        return width;
+        return width * TreasureGame.TILESIZE;
     }
 
-    /** Returns the height of the map in tiles. */
+    /** Returns the height of the map in world units. */
     public int getHeight() {
-        return height;
+        return height * TreasureGame.TILESIZE;
     }
 }
