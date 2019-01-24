@@ -203,8 +203,9 @@ public class PlayState extends State {
     }
 
     /** Releases a lamb. */
-    private void releaseLamb(float x, float y) {
+    private void releaseLamb() {
         float maxDist = 0, dist;
+        float x = player.getX(), y = player.getY();
         float tx = 0, ty = 0, tempx, tempy;
         for (Item item : items) {
             if (item instanceof AnimatedItem)
@@ -231,7 +232,7 @@ public class PlayState extends State {
         if (hud.isHoldingBomb())
             dropBomb();
         if (hud.isHoldingLamb())
-            releaseLamb(player.getTileX(), player.getTileY());
+            releaseLamb();
 
         // update all creatures
         for (int i = 0; i < creatures.size(); i++) {
