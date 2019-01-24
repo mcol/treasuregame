@@ -9,6 +9,11 @@ public class BitFont {
     private static final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                                       + "0123456789.,:;'!?()-=+/_~<|";
 
+    /** Alignment options. */
+    public enum Align {
+        LEFT, CENTRE, RIGHT
+    }
+
     /** Available font sizes. */
     public enum Size {
 
@@ -26,10 +31,12 @@ public class BitFont {
 
     /** Renders a message using the font characters. */
     public static void renderMessage(SpriteBatch sb, String msg, float x, float y,
-                                     Size size, boolean leftAligned) {
+                                     Size size, Align alignment) {
 
-        // adjust the position if the message is right aligned
-        if (!leftAligned)
+        // adjust the position if the message is centred or right aligned
+        if (alignment == Align.CENTRE)
+            x -= msg.length() * size.scale / 2;
+        else if (alignment == Align.RIGHT)
             x -= msg.length() * size.scale;
 
         // convert to uppercase before matching

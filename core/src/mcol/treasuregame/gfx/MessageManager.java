@@ -3,6 +3,7 @@ package mcol.treasuregame.gfx;
 import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import mcol.treasuregame.TreasureGame;
 
 public class MessageManager {
 
@@ -33,7 +34,8 @@ public class MessageManager {
 
     /** Adds a message to the list. */
     public void addMessage(String message, float x, float y) {
-        messages.add(new Message(message, x, y));
+        messages.add(new Message(message, x + TreasureGame.TILESIZE * 0.5f,
+                                          y + TreasureGame.TILESIZE));
     }
 
     public void update(float dt) {
@@ -54,7 +56,7 @@ public class MessageManager {
         for (int i = 0; i < messages.size(); i++) {
             Message msg = messages.get(i);
             BitFont.renderMessage(sb, msg.message, msg.x, msg.y,
-                                  BitFont.Size.MICRO, true);
+                                  BitFont.Size.MICRO, BitFont.Align.CENTRE);
         }
     }
 }

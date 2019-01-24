@@ -166,8 +166,7 @@ public class PlayState extends State {
                 if (value > 0) {
                     player.addScore(value);
                     messageManager.addMessage(Integer.toString(value),
-                                              item.getBounds().x,
-                                              item.getBounds().y);
+                                              item.getX(), item.getY());
                 }
                 if (item instanceof Hurricane) {
                     items.add(new MovingHurricane(item.getX(), item.getY(), map));
@@ -175,8 +174,7 @@ public class PlayState extends State {
                 else if (item instanceof Bomb) {
                     player.addBomb();
                     messageManager.addMessage("+1 bomb",
-                                              item.getBounds().x,
-                                              item.getBounds().y);
+                                              item.getX(), item.getY());
                 }
                 items.remove(i);
                 break;
