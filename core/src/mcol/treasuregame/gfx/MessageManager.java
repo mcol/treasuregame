@@ -18,7 +18,7 @@ public class MessageManager {
         public float stateTime;
 
         /** Constructor. */
-        public Message(String message, int x, int y) {
+        public Message(String message, float x, float y) {
             this.message = message;
             this.x = x;
             this.y = y;
@@ -33,7 +33,7 @@ public class MessageManager {
 
     /** Adds a message to the list. */
     public void addMessage(String message, float x, float y) {
-        messages.add(new Message(message, (int) x, (int) y));
+        messages.add(new Message(message, x, y));
     }
 
     public void update(float dt) {

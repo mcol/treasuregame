@@ -31,7 +31,7 @@ public class Player extends Creature {
     private int lambs;
 
     /** Constructor. */
-    public Player(int x, int y, int character) {
+    public Player(float x, float y, int character) {
         super(x, y, SPEED, FOG_RADIUS);
         int row = character / 4 * 4;
         int col = character % 4 * 3;

@@ -220,7 +220,7 @@ public class PlayState extends State {
                 ty = tempy;
             }
         }
-        creatures.add(new Lamb((int) x, (int) y, tx, ty, map));
+        creatures.add(new Lamb(x, y, tx, ty, map));
         player.removeLamb();
         hud.resetCheckedButton();
     }

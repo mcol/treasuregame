@@ -17,7 +17,7 @@ public class Lamb extends Creature {
     private static final int FOG_RADIUS = 3;
 
     /** Constructor. */
-    public Lamb(int x, int y, float xTarget, float yTarget, Map map) {
+    public Lamb(float x, float y, float xTarget, float yTarget, Map map) {
         super(x, y, SPEED, FOG_RADIUS);
 
         dn = new Animation<TextureRegion>(ANIMATION_TIME, Assets.lambTexture[0]);

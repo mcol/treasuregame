@@ -64,7 +64,7 @@ public abstract class Creature {
     protected boolean walking;
 
     /** Constructor. */
-    public Creature(int x, int y, int speed, int fogRadius) {
+    public Creature(float x, float y, int speed, int fogRadius) {
         this.speed = speed;
         this.fogRadius = fogRadius;
         dir = Direction.DOWN;
@@ -138,7 +138,7 @@ public abstract class Creature {
     // getters and setters
 
     /** Sets the current position. */
-    public void setPosition(int x, int y) {
+    public void setPosition(float x, float y) {
         position.x = x;
         position.y = y;
         currentTile = Utils.toTile(position);
