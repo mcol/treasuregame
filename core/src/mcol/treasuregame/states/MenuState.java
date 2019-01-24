@@ -1,6 +1,7 @@
 package mcol.treasuregame.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -62,8 +63,15 @@ public class MenuState extends State {
         stage.addActor(exit);
     }
 
+    /** Handles the input. */
+    private void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+            Gdx.app.exit();
+    }
+
     @Override
     protected void update(float dt) {
+        handleInput();
         background.update(dt);
     }
 
