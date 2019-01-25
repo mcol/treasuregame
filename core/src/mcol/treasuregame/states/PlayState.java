@@ -75,7 +75,7 @@ public class PlayState extends State {
     private void initializeWorld(int level) {
         map = new Map(sb, level);
         worldWidth = map.getHeight();
-        worldHeight = map.getWidth();
+        worldHeight = map.getHeight();
         items = new ArrayList<Item>();
         creatures = new ArrayList<Creature>();
         creatures.add(player);
