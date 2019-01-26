@@ -76,8 +76,8 @@ public class PlayState extends State {
         map = new Map(sb, level);
         worldWidth = map.getHeight();
         worldHeight = map.getHeight();
-        items = new ArrayList<Item>();
-        creatures = new ArrayList<Creature>();
+        items = new ArrayList<>();
+        creatures = new ArrayList<>();
         creatures.add(player);
         messageManager = new MessageManager();
         hud = new HUD(sb, map, player);

@@ -52,7 +52,7 @@ public class PathFinder {
     }
 
     /** Nodes to be examined. */
-    private static BinaryHeap<PathNode> bhopen = new BinaryHeap<PathNode>(200, false);
+    private static BinaryHeap<PathNode> bhopen = new BinaryHeap<>(200, false);
 
     /** Correction factor for diagonal movements. */
     private static final float oct = (float) Math.sqrt(2) - 2;
@@ -157,7 +157,7 @@ public class PathFinder {
 
     /** Creates the path from the target to the current node. */
     private static List<Vector3> makePath(PathNode node) {
-        List<Vector3> path = new ArrayList<Vector3>();
+        List<Vector3> path = new ArrayList<>();
         while (node.parent != null) {
             path.add(node.tile);
             node = node.parent;

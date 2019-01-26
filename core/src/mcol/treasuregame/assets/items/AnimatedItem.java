@@ -20,7 +20,7 @@ public abstract class AnimatedItem extends Item {
                         float animationTime, float durationTime) {
         super(x, y, value, null);
         this.durationTime = durationTime;
-        animation = new Animation<TextureRegion>(animationTime, animationTexture);
+        animation = new Animation<>(animationTime, animationTexture);
     }
 
     @Override

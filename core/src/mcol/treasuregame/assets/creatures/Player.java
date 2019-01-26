@@ -39,10 +39,10 @@ public class Player extends Creature {
         TextureRegion[] l = Assets.playTexture[row + 1];
         TextureRegion[] r = Assets.playTexture[row + 2];
         TextureRegion[] u = Assets.playTexture[row + 3];
-        dn = new Animation<TextureRegion>(ANIMATION_TIME, d[col], d[col + 1], d[col + 2]);
-        lt = new Animation<TextureRegion>(ANIMATION_TIME, l[col], l[col + 1], l[col + 2]);
-        rt = new Animation<TextureRegion>(ANIMATION_TIME, r[col], r[col + 1], r[col + 2]);
-        up = new Animation<TextureRegion>(ANIMATION_TIME, u[col], u[col + 1], u[col + 2]);
+        dn = new Animation<>(ANIMATION_TIME, d[col], d[col + 1], d[col + 2]);
+        lt = new Animation<>(ANIMATION_TIME, l[col], l[col + 1], l[col + 2]);
+        rt = new Animation<>(ANIMATION_TIME, r[col], r[col + 1], r[col + 2]);
+        up = new Animation<>(ANIMATION_TIME, u[col], u[col + 1], u[col + 2]);
         dn.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         lt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         rt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);

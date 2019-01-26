@@ -1,7 +1,6 @@
 package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.Map;
 
@@ -20,10 +19,10 @@ public class Lamb extends Creature {
     public Lamb(float x, float y, float xTarget, float yTarget, Map map) {
         super(x, y, SPEED, FOG_RADIUS);
 
-        dn = new Animation<TextureRegion>(ANIMATION_TIME, Assets.lambTexture[0]);
-        lt = new Animation<TextureRegion>(ANIMATION_TIME, Assets.lambTexture[1]);
-        rt = new Animation<TextureRegion>(ANIMATION_TIME, Assets.lambTexture[2]);
-        up = new Animation<TextureRegion>(ANIMATION_TIME, Assets.lambTexture[3]);
+        dn = new Animation<>(ANIMATION_TIME, Assets.lambTexture[0]);
+        lt = new Animation<>(ANIMATION_TIME, Assets.lambTexture[1]);
+        rt = new Animation<>(ANIMATION_TIME, Assets.lambTexture[2]);
+        up = new Animation<>(ANIMATION_TIME, Assets.lambTexture[3]);
         dn.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         lt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         rt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
