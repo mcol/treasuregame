@@ -3,8 +3,6 @@ package mcol.treasuregame.gfx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -74,42 +72,6 @@ public class HUD implements Disposable {
         bombButton = Utils.createButton(Assets.buttonBombTexture);
         lambButton = Utils.createButton(Assets.buttonLambTexture);
         playButton.setChecked(true);
-
-        // toggle between the play and the bomb buttons
-        bombButton.clearListeners();
-        bombButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (bombButton.isDisabled())
-                    return;
-                if (bombButton.isChecked())
-                    playButton.setChecked(true);
-                else
-                    bombButton.setChecked(true);
-            }
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-
-        // toggle between the play and the lamb buttons
-        lambButton.clearListeners();
-        lambButton.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (lambButton.isDisabled())
-                    return;
-                if (lambButton.isChecked())
-                    playButton.setChecked(true);
-                else
-                    lambButton.setChecked(true);
-            }
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
 
         // table to organize the buttons
         Table btns = new Table().padTop(20);
