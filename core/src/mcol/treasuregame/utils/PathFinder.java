@@ -1,7 +1,6 @@
 package mcol.treasuregame.utils;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
@@ -138,22 +137,6 @@ public class PathFinder {
 
         return makePath(currentBestNode);
     }
-
-    /** Sorts nodes according to cost and recentness. */
-    public static final Comparator<PathNode> sorter = new Comparator<PathNode>() {
-        @Override
-        public int compare(PathNode node0, PathNode node1) {
-            if (node0.fCost > node1.fCost)
-                return 1;
-            if (node0.fCost < node1.fCost)
-                return -1;
-            if (node0.iter < node1.iter)
-                return 1;
-            if (node0.iter > node1.iter)
-                return -1;
-            return 0;
-        }
-    };
 
     /** Creates the path from the target to the current node. */
     private static List<Vector3> makePath(PathNode node) {
