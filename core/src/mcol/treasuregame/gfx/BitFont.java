@@ -1,6 +1,6 @@
 package mcol.treasuregame.gfx;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import mcol.treasuregame.assets.Assets;
 
 public class BitFont {
@@ -30,7 +30,7 @@ public class BitFont {
     }
 
     /** Renders a message using the font characters. */
-    public static void renderMessage(SpriteBatch sb, String msg, float x, float y,
+    public static void renderMessage(Batch sb, String msg, float x, float y,
                                      Size size, Align alignment) {
 
         // adjust the position if the message is centred or right aligned
