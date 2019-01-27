@@ -1,9 +1,10 @@
 package mcol.treasuregame.gfx;
 
-import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import mcol.treasuregame.TreasureGame;
+
+import java.util.ArrayList;
 
 public class MessageManager {
 

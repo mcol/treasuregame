@@ -1,6 +1,5 @@
 package mcol.treasuregame.states;
 
-import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -15,19 +14,13 @@ import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.assets.creatures.Creature;
 import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
-import mcol.treasuregame.assets.items.AnimatedItem;
-import mcol.treasuregame.assets.items.ArmedBomb;
-import mcol.treasuregame.assets.items.Bomb;
-import mcol.treasuregame.assets.items.Explosion;
-import mcol.treasuregame.assets.items.Hurricane;
-import mcol.treasuregame.assets.items.Item;
-import mcol.treasuregame.assets.items.MovingHurricane;
-import mcol.treasuregame.assets.items.Sweet;
-import mcol.treasuregame.assets.items.TargetIndicator;
+import mcol.treasuregame.assets.items.*;
 import mcol.treasuregame.gfx.CameraShake;
 import mcol.treasuregame.gfx.HUD;
 import mcol.treasuregame.gfx.MessageManager;
 import mcol.treasuregame.utils.Utils;
+
+import java.util.ArrayList;
 
 public class PlayState extends State {
 

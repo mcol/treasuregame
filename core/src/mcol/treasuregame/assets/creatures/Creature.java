@@ -1,6 +1,5 @@
 package mcol.treasuregame.assets.creatures;
 
-import java.util.List;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +9,8 @@ import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.utils.PathFinder;
 import mcol.treasuregame.utils.Utils;
+
+import java.util.List;
 
 public abstract class Creature {
 
