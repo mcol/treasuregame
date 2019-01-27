@@ -17,17 +17,8 @@ import mcol.treasuregame.utils.Utils;
 
 public class HUD implements Disposable {
 
-    /** Format string for the level. */
-    private static final String levelFormat = "Level: %3d";
-
     /** Format string for the score. */
     private static final String scoreFormat = "Score: %3d";
-
-    /** Format string for the number of bombs. */
-    private static final String bombsFormat = "%3d";
-
-    /** Format string for the map coverage. */
-    private static final String coverFormat = "Cover: %3d";
 
     /** Scene graph for the HUD information. */
     private final Stage stage;
@@ -35,17 +26,8 @@ public class HUD implements Disposable {
     /** The player object. */
     private final Player player;
 
-    /** Label reporting the current level. */
-    private Label levelLabel;
-
     /** Label reporting the current score. */
     private Label scoreLabel;
-
-    /** Label reporting the current number of bombs. */
-    private Label bombsLabel;
-
-    /** Label reporting the current map coverage. */
-    private Label coverLabel;
 
     /** Buttons in the HUD. */
     private Button playButton, bombButton, lambButton;
@@ -63,10 +45,7 @@ public class HUD implements Disposable {
         // labels
         Label.LabelStyle labelStyle = new Label.LabelStyle(new Font(16).get(),
                                                            Color.WHITE);
-        levelLabel = new Label(String.format(levelFormat, 1), labelStyle);
         scoreLabel = new Label(String.format(scoreFormat, 0), labelStyle);
-        bombsLabel = new Label(String.format(bombsFormat, 0), labelStyle);
-        coverLabel = new Label(String.format(coverFormat, 0), labelStyle);
 
         playButton = Utils.createButton(Assets.buttonPlayTexture);
         bombButton = Utils.createButton(Assets.buttonBombTexture);
@@ -83,13 +62,9 @@ public class HUD implements Disposable {
         // table to organize the labels
         Table table = new Table().right().padRight(20);
         table.setFillParent(true);
-        table.add(levelLabel);
-        table.row();
         table.add(scoreLabel).padTop(20);
         table.row();
         table.add(btns);
-        table.row();
-        table.add(coverLabel).padTop(20);
 
         stage.addActor(table);
     }
@@ -122,24 +97,9 @@ public class HUD implements Disposable {
         return stage;
     }
 
-    /** Sets the current level. */
-    public void setLevel(int level) {
-        levelLabel.setText(String.format(levelFormat, level));
-    }
-
     /** Sets the current score. */
     public void setScore() {
         scoreLabel.setText(String.format(scoreFormat, player.getScore()));
-    }
-
-    /** Sets the current number of bombs. */
-    public void setBombs() {
-        bombsLabel.setText(String.format(bombsFormat, player.getBombs()));
-    }
-
-    /** Sets the current map coverage. */
-    public void setCoverage(int coverage) {
-        coverLabel.setText(String.format(coverFormat, coverage));
     }
 
     /** Returns whether the bomb button is active. */

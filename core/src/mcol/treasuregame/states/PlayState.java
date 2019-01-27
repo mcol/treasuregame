@@ -81,7 +81,6 @@ public class PlayState extends State {
         creatures.add(player);
         messageManager = new MessageManager();
         hud = new HUD(sb, map, player);
-        hud.setLevel(level);
         placeItems();
     }
 
@@ -186,7 +185,6 @@ public class PlayState extends State {
     private void dropBomb() {
         items.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
-        hud.setBombs();
         hud.resetCheckedButton();
     }
 
