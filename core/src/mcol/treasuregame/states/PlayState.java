@@ -107,7 +107,6 @@ public class PlayState extends State {
             } catch (Exception e) {
                 e.printStackTrace();
                 Gdx.app.log("getItems", x + " " + y);
-                continue;
             }
         }
     }
