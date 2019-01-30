@@ -160,14 +160,14 @@ public class Map {
         return map.getLayers().get("Objects").getObjects();
     }
 
-    /** Returns the obstacles layer. */
-    public TiledMapTileLayer getObstacles() {
-        return obs;
+    /** Returns whether there is an obstacle at the given tile coordinates. */
+    public boolean hasObstacle(int x, int y) {
+        return obs.getCell(x, y) != null;
     }
 
-    /** Returns the fog layer. */
-    public TiledMapTileLayer getFog() {
-        return fog;
+    /** Returns whether there is fog at the given tile coordinates. */
+    public boolean hasFog(int x, int y) {
+        return fog.getCell(x, y) != null;
     }
 
     /** Returns the width of the map in world units. */

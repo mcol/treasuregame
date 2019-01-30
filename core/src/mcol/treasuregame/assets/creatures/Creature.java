@@ -3,10 +3,10 @@ package mcol.treasuregame.assets.creatures;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
+import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.utils.PathFinder;
 import mcol.treasuregame.utils.Utils;
 
@@ -78,10 +78,10 @@ public abstract class Creature {
     }
 
     /** Computes the path to the target tile. */
-    public void findPathToTarget(TiledMapTileLayer obstacles, Vector3 coords) {
+    public void findPathToTarget(Map map, Vector3 coords) {
         targetTile = Utils.toTile(coords);
         target.set(position);
-        path = PathFinder.findPath(obstacles, currentTile, targetTile);
+        path = PathFinder.findPath(map, currentTile, targetTile);
     }
 
     public void update(float dt) {

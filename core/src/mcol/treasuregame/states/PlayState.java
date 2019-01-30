@@ -200,7 +200,7 @@ public class PlayState extends State {
                 continue;
             tempx = item.getX();
             tempy = item.getY();
-            if (map.getFog().getCell(Utils.toTile(tempx), Utils.toTile(tempy)) == null)
+            if (!map.hasFog(Utils.toTile(tempx), Utils.toTile(tempy)))
                 continue;
             dist = Math.abs(tempx - x) + Math.abs(tempy - y);
             if (dist > maxDist) {
@@ -293,7 +293,7 @@ public class PlayState extends State {
         viewport.unproject(coords);
 
         // transform screen coordinates to world coordinates
-        player.findPathToTarget(map.getObstacles(), coords);
+        player.findPathToTarget(map, coords);
         return false;
     }
 }

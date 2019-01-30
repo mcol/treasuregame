@@ -29,7 +29,7 @@ public class Lamb extends Creature {
         up.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         target.x = xTarget;
         target.y = yTarget;
-        findPathToTarget(map.getObstacles(), target);
+        findPathToTarget(map, target);
     }
 
     @Override

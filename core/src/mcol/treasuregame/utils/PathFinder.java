@@ -1,9 +1,9 @@
 package mcol.treasuregame.utils;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.BinaryHeap;
 import com.badlogic.gdx.utils.BinaryHeap.Node;
+import mcol.treasuregame.assets.Map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +65,11 @@ public class PathFinder {
     }
 
     /** Finds a path in the map using A*. */
-    public static List<Vector3> findPath(TiledMapTileLayer obstacles,
-                                         Vector3 start, Vector3 target) {
+    public static List<Vector3> findPath(Map map, Vector3 start, Vector3 target) {
         int iter = 0;
         int ttx = (int) target.x, tty = (int) target.y;
-        int width = obstacles.getWidth();
-        int height = obstacles.getHeight();
+        int width = Utils.toTile(map.getWidth());
+        int height = Utils.toTile(map.getHeight());
         PathNode current = new PathNode(start, null, heuristic(start, target), iter);
         PathNode currentBestNode = current;
         float currentBestCost = 10000000f;
@@ -105,7 +104,7 @@ public class PathFinder {
                     continue;
 
                 // avoid nodes corresponding to obstacles
-                if (obstacles.getCell(tx, ty) != null) {
+                if (map.hasObstacle(tx, ty)) {
                     if (tx == ttx && ty == tty)
                         return makePath(current);
                     continue;
