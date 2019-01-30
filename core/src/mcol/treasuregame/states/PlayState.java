@@ -267,11 +267,7 @@ public class PlayState extends State {
             creature.render(sb);
         for (Item item : items)
             item.render(sb);
-        sb.end();
-        map.setView(camera);
-        map.renderForegroundLayers();
-
-        sb.begin();
+        map.renderFog(sb);
         messageManager.render(sb);
         targetIndicator.render(sb);
         sb.end();
