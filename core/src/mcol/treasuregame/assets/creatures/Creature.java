@@ -31,7 +31,7 @@ public abstract class Creature {
     /** Movement speed. */
     protected final int speed;
 
-    /** Amount of fog cleared. */
+    /** Amount of fog cleared in each direction. */
     protected final int fogRadius;
 
     /** Current facing direction. */

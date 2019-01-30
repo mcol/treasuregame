@@ -182,12 +182,12 @@ public class PlayState extends State {
 
     /** Explodes the bomb. */
     private void explodeBomb(Item item) {
-        int radius = 7;
-        int tx = (int) item.getX() / TreasureGame.TILESIZE - radius / 2;
-        int ty = (int) item.getY() / TreasureGame.TILESIZE - radius / 2;
+        int radius = 3;
+        float tx = item.getX();
+        float ty = item.getY();
         items.add(new Explosion(tx, ty, radius));
-        map.destroyFog(tx, ty, radius);
-        map.destroyObstacles(tx, ty, radius);
+        map.destroyFog(Utils.toTile(tx), Utils.toTile(ty), radius);
+        map.destroyObstacles(Utils.toTile(tx), Utils.toTile(ty), radius);
     }
 
     /** Releases a lamb. */
@@ -226,8 +226,8 @@ public class PlayState extends State {
         for (int i = 0; i < creatures.size(); i++) {
             Creature creature = creatures.get(i);
             creature.update(dt);
-            int tx = Utils.toTile(creature.getPosition().x) - creature.getFogRadius() / 2;
-            int ty = Utils.toTile(creature.getPosition().y) - creature.getFogRadius() / 2;
+            int tx = Utils.toTile(creature.getPosition().x);
+            int ty = Utils.toTile(creature.getPosition().y);
             map.destroyFog(tx, ty, creature.getFogRadius());
             if (creature.shouldRemove())
                 creatures.remove(i);

@@ -12,8 +12,8 @@ public class Lamb extends Creature {
     /** Movement speed. */
     private static final int SPEED = 3;
 
-    /** Amount of fog cleared. */
-    private static final int FOG_RADIUS = 3;
+    /** Amount of fog cleared in each direction. */
+    private static final int FOG_RADIUS = 1;
 
     /** Constructor. */
     public Lamb(float x, float y, float xTarget, float yTarget, Map map) {

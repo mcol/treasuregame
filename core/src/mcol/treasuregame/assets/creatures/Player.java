@@ -12,8 +12,8 @@ public class Player extends Creature {
     /** Movement speed. */
     private static final int SPEED = 4;
 
-    /** Amount of fog cleared. */
-    private static final int FOG_RADIUS = 3;
+    /** Amount of fog cleared in each direction. */
+    private static final int FOG_RADIUS = 1;
 
     /** Cost of a lamb. */
     private static final int LAMB_COST = 20;

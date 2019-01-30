@@ -52,6 +52,6 @@ public class MovingHurricane extends AnimatedItem {
     public void update(float dt) {
         super.update(dt);
         move(dt);
-        map.destroyFog(Utils.toTile(x), Utils.toTile(y), 2);
+        map.destroyFog(Utils.toTile(x), Utils.toTile(y), 1);
     }
 }

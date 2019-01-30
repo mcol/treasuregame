@@ -116,14 +116,20 @@ public class Map {
 
     /** Removes the fog tiles in a radius around a point. */
     public void destroyFog(int tx, int ty, int radius) {
-        for (int j = 0; j < radius * radius; j++)
-            fog.setCell(tx + j % radius, ty + j / radius, null);
+        int diameter = radius * 2 + 1;
+        tx = tx - radius;
+        ty = ty - radius;
+        for (int j = 0; j < diameter * diameter; j++)
+            fog.setCell(tx + j % diameter, ty + j / diameter, null);
     }
 
     /** Removes the obstacle tiles in a radius around a point. */
     public void destroyObstacles(int tx, int ty, int radius) {
-        for (int j = 0; j < radius * radius; j++)
-            obs.setCell(tx + j % radius, ty + j / radius, null);
+        int diameter = radius * 2 + 1;
+        tx = tx - radius;
+        ty = ty - radius;
+        for (int j = 0; j < diameter * diameter; j++)
+            obs.setCell(tx + j % diameter, ty + j / diameter, null);
     }
 
     /** Toggles visibility of the fog layer. */
