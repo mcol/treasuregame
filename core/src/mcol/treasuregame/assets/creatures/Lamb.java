@@ -15,10 +15,13 @@ public class Lamb extends Creature {
     /** Amount of fog cleared in each direction. */
     private static final int FOG_RADIUS = 1;
 
+    /** The world map. */
+    private final Map map;
+
     /** Constructor. */
     public Lamb(float x, float y, float xTarget, float yTarget, Map map) {
         super(x, y, SPEED, FOG_RADIUS);
-
+        this.map = map;
         dn = new Animation<>(ANIMATION_TIME, Assets.lambTexture[0]);
         lt = new Animation<>(ANIMATION_TIME, Assets.lambTexture[1]);
         rt = new Animation<>(ANIMATION_TIME, Assets.lambTexture[2]);
@@ -34,6 +37,6 @@ public class Lamb extends Creature {
 
     @Override
     public boolean shouldRemove() {
-        return !walking && currentTile.epsilonEquals(targetTile);
+        return !walking && !map.hasFog((int) targetTile.x, (int) targetTile.y);
     }
 }
