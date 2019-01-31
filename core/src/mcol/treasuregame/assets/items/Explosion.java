@@ -24,7 +24,7 @@ public class Explosion extends AnimatedItem {
     public void render(SpriteBatch sb) {
         TextureRegion frame = animation.getKeyFrame(stateTime);
         int diameter = radius * 2 + 1;
-        for (int i = 0; i < diameter * diameter; i++)
+        for (int i = 0, end = diameter * diameter; i < end; i++)
             sb.draw(frame, x + i / diameter * TreasureGame.TILESIZE,
                            y + i % diameter * TreasureGame.TILESIZE, SIZE, SIZE);
     }

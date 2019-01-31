@@ -105,10 +105,10 @@ public class Map {
 
     /** Removes the obstacle tiles in a radius around a point. */
     public void destroyObstacles(int tx, int ty, int radius) {
-        int diameter = radius * 2 + 1;
         tx = tx - radius;
         ty = ty - radius;
-        for (int j = 0; j < diameter * diameter; j++)
+        int diameter = radius * 2 + 1;
+        for (int j = 0, end = diameter * diameter; j < end; j++)
             obs.setCell(tx + j % diameter, ty + j / diameter, null);
     }
 
