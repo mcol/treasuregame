@@ -40,10 +40,10 @@ public class PlayState extends State {
     private HUD hud;
 
     /** Height of the world in world units. */
-    private int worldWidth;
+    private float worldWidth;
 
     /** Width of the world in world units. */
-    private int worldHeight;
+    private float worldHeight;
 
     /** Container for all items. */
     private ArrayList<Item> items;
@@ -57,7 +57,7 @@ public class PlayState extends State {
     /** Constructor. */
     public PlayState(TreasureGame game, SpriteBatch sb) {
         super(game, sb);
-        player = new Player(13, 13, 0);
+        player = new Player(12, 12, 0);
         targetIndicator = new TargetIndicator(player);
         level = 0;
         initializeWorld(level);
@@ -90,8 +90,8 @@ public class PlayState extends State {
         MapObjects objects = map.getObjects();
         for (MapObject obj : objects) {
             MapProperties mp = obj.getProperties();
-            int x = mp.get("x", float.class).intValue() / TreasureGame.SCALE;
-            int y = mp.get("y", float.class).intValue() / TreasureGame.SCALE;
+            float x = (mp.get("x", float.class) * TreasureGame.SCALE);
+            float y = (mp.get("y", float.class) * TreasureGame.SCALE);
             String type = mp.get("type", String.class);
             try {
                 switch (type) {

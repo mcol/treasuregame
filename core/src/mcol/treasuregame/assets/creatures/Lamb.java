@@ -1,6 +1,7 @@
 package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.Map;
 
@@ -10,7 +11,7 @@ public class Lamb extends Creature {
     private static final float ANIMATION_TIME = 0.1f;
 
     /** Movement speed. */
-    private static final int SPEED = 3;
+    private static final float SPEED = 3 * TreasureGame.TILESIZE;
 
     /** Amount of fog cleared in each direction. */
     private static final int FOG_RADIUS = 1;

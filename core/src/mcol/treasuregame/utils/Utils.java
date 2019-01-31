@@ -19,12 +19,6 @@ public class Utils {
                            (int) (coords.y / TreasureGame.TILESIZE), 0);
     }
 
-    /** Converts a vector to tile coordinates after some rounding. */
-    public static Vector3 toTile(Vector3 coords, float round) {
-        return new Vector3((int) ((coords.x + round) / TreasureGame.TILESIZE),
-                           (int) ((coords.y + round) / TreasureGame.TILESIZE), 0);
-    }
-
     /** Enforces a value to stay between two extremes. */
     public static float clampValue(float x, float min, float max) {
         return x < min ? min : x > max ? max : x;

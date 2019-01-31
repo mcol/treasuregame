@@ -13,9 +13,6 @@ import mcol.treasuregame.TreasureGame;
 
 public class Map {
 
-    /** Size of a tile in pixels. */
-    private static final int TILESIZE = 32;
-
     /** Identifier of the tile used for fog. */
     private static final int FOG_TILE_ID = 35;
 
@@ -52,7 +49,7 @@ public class Map {
     /** Constructor. */
     public Map(SpriteBatch sb, int level) {
         map = Assets.get(String.format("maps/%02d.tmx", level), TiledMap.class);
-        mapRenderer = new OrthogonalTiledMapRenderer(map, (float) 1 / TreasureGame.SCALE, sb);
+        mapRenderer = new OrthogonalTiledMapRenderer(map, TreasureGame.SCALE, sb);
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
         width = layer.getWidth();
         height = layer.getHeight();
@@ -82,7 +79,8 @@ public class Map {
 
         // create the new layer
         TiledMapTileLayer obsOrig = (TiledMapTileLayer) map.getLayers().get("Obstacles");
-        obs = new TiledMapTileLayer(width, height, TILESIZE, TILESIZE);
+        final int tileSize = TreasureGame.TILESIZE_PIXELS;
+        obs = new TiledMapTileLayer(width, height, tileSize, tileSize);
         obs.setName(OBS_LAYER_NAME);
 
         // copy the original layer
@@ -158,12 +156,12 @@ public class Map {
     }
 
     /** Returns the width of the map in world units. */
-    public int getWidth() {
+    public float getWidth() {
         return width * TreasureGame.TILESIZE;
     }
 
     /** Returns the height of the map in world units. */
-    public int getHeight() {
+    public float getHeight() {
         return height * TreasureGame.TILESIZE;
     }
 }

@@ -2,6 +2,7 @@ package mcol.treasuregame.assets.items;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.creatures.Player;
 
@@ -22,6 +23,7 @@ public class TargetIndicator extends AnimatedItem {
         if (!player.isWalking())
             return;
         sb.draw(animation.getKeyFrame(stateTime),
-                player.getTargetTile().x, player.getTargetTile().y, SIZE, SIZE);
+                player.getTargetTile().x * TreasureGame.TILESIZE,
+                player.getTargetTile().y * TreasureGame.TILESIZE, SIZE, SIZE);
     }
 }

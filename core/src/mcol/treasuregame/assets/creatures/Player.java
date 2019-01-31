@@ -2,6 +2,7 @@ package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 
 public class Player extends Creature {
@@ -10,7 +11,7 @@ public class Player extends Creature {
     private static final float ANIMATION_TIME = 0.15f;
 
     /** Movement speed. */
-    private static final int SPEED = 4;
+    private static final float SPEED = 4 * TreasureGame.TILESIZE;
 
     /** Amount of fog cleared in each direction. */
     private static final int FOG_RADIUS = 1;

@@ -20,7 +20,7 @@ public abstract class Creature {
     }
 
     /** Rendered width and height in world units. */
-    protected static final int SIZE = 32 / TreasureGame.SCALE;
+    protected static final float SIZE = 32 * TreasureGame.SCALE;
 
     /** Minimum movement before rounding to the tile edge. */
     private static final float MIN_STEP = 0.1f;
@@ -29,7 +29,7 @@ public abstract class Creature {
     protected Animation<TextureRegion> dn, lt, rt, up;
 
     /** Movement speed. */
-    protected final int speed;
+    protected final float speed;
 
     /** Amount of fog cleared in each direction. */
     protected final int fogRadius;
@@ -65,11 +65,11 @@ public abstract class Creature {
     protected boolean walking;
 
     /** Constructor. */
-    public Creature(float x, float y, int speed, int fogRadius) {
+    public Creature(float x, float y, float speed, int fogRadius) {
         this.speed = speed;
         this.fogRadius = fogRadius;
         dir = Direction.DOWN;
-        position = new Vector3(x, y, 0).scl(TreasureGame.TILESIZE);
+        position = new Vector3(x, y, 0);
         velocity = new Vector3();
         bounds = new Rectangle(position.x, position.y, SIZE, SIZE);
         target = new Vector3(position);
@@ -112,7 +112,7 @@ public abstract class Creature {
             walking = true;
         }
 
-        currentTile = Utils.toTile(position, 0.5f);
+        currentTile = Utils.toTile(position);
         bounds.setPosition(position.x, position.y);
     }
 
@@ -158,16 +158,6 @@ public abstract class Creature {
     /** Returns the vertical coordinate in world units. */
     public float getY() {
         return position.y;
-    }
-
-    /** Returns the horizontal coordinate in tiles. */
-    public int getTileX() {
-        return (int) position.x / TreasureGame.TILESIZE;
-    }
-
-    /** Returns the vertical coordinate in tiles. */
-    public int getTileY() {
-        return (int) position.y / TreasureGame.TILESIZE;
     }
 
     /** Returns the collision bounding box. */

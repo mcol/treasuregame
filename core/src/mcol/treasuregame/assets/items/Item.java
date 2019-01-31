@@ -7,11 +7,8 @@ import mcol.treasuregame.TreasureGame;
 
 public abstract class Item {
 
-    /** Size of the item in pixels. */
-    protected static final int ORIG_SIZE = 32;
-
     /** Rendered width and height in world units. */
-    protected static final int SIZE = ORIG_SIZE / TreasureGame.SCALE;
+    protected static final float SIZE = 32 * TreasureGame.SCALE;
 
     /** Texture representing the item. */
     protected TextureRegion texture;

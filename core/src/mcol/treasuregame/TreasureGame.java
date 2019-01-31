@@ -13,14 +13,14 @@ public class TreasureGame extends Game {
     /** Width of the game viewport in world units. */
     public static final int WIDTH = HEIGHT * 16 / 9;
 
-    /** Scaling factor for rendering. */
-    public static final int SCALE = 32;
+    /** Number of pixels per world unit. */
+    public static final float SCALE = 1f / 32;
 
     /** Size of each tile in pixels. */
-    private static final int ORIG_TILESIZE = 32;
+    public static final int TILESIZE_PIXELS = 32;
 
-    /** Scaled size of each tile in world units. */
-    public static final int TILESIZE = ORIG_TILESIZE / SCALE;
+    /** Size of a tile in world units. */
+    public static final float TILESIZE = TILESIZE_PIXELS * SCALE;
 
     /** Name of the game. */
     public static final String TITLE = "TreasureGame";

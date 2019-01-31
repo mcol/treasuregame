@@ -2,6 +2,7 @@ package mcol.treasuregame.assets.items;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.MathUtils;
+import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.utils.Utils;
@@ -22,8 +23,8 @@ public class MovingHurricane extends AnimatedItem {
         super(x, y, 0, Assets.hurrTexture, 0.1f, 20f);
         this.map = map;
         animation.setPlayMode(Animation.PlayMode.LOOP);
-        xSpeed = MathUtils.random(1, 3) * MathUtils.randomSign();
-        ySpeed = MathUtils.random(1, 3) * MathUtils.randomSign();
+        xSpeed = MathUtils.random(1, 3) * MathUtils.randomSign() * TreasureGame.TILESIZE;
+        ySpeed = MathUtils.random(1, 3) * MathUtils.randomSign() * TreasureGame.TILESIZE;
         xNextChange = MathUtils.random(2, 7);
         yNextChange = MathUtils.random(2, 7);
     }

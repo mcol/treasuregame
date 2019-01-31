@@ -48,8 +48,8 @@ public class MessageManager {
                 i--;
                 continue;
             }
-            msg.y += MathUtils.random(0, 5) * dt;
-            msg.x += MathUtils.random(-4, 4) * dt;
+            msg.y += MathUtils.random(0, 3) * TreasureGame.TILESIZE * dt;
+            msg.x += MathUtils.random(-2, 2) * TreasureGame.TILESIZE * dt;
         }
     }
 

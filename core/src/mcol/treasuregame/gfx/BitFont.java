@@ -1,6 +1,7 @@
 package mcol.treasuregame.gfx;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 
 public class BitFont {
@@ -18,14 +19,14 @@ public class BitFont {
     public enum Size {
 
         /** Available sizes */
-        TITLE(3.0f), LARGE(2.0f), MEDIUM(1.0f), SMALL(0.5f), MICRO(0.3f), TINY(0.2f);
+        TITLE(6.0f), LARGE(4.0f), MEDIUM(2.0f), SMALL(1.0f), MICRO(0.6f), TINY(0.3f);
 
         /** Scaling factor. */
         private final float scale;
 
         /** Constructor. */
         Size(float scale) {
-            this.scale = scale;
+            this.scale = scale * TreasureGame.HEIGHT / 32;
         }
     }
 
