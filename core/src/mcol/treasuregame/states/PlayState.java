@@ -67,7 +67,7 @@ public class PlayState extends State {
     /** Initializes the world. */
     private void initializeWorld(int level) {
         map = new Map(sb, level);
-        worldWidth = map.getHeight();
+        worldWidth = map.getWidth();
         worldHeight = map.getHeight();
         items = new ArrayList<>();
         creatures = new ArrayList<>();
@@ -137,9 +137,9 @@ public class PlayState extends State {
     /** Checks the map bounds to avoid showing blank space outside of the map. */
     private Vector3 limitCamera(Vector3 pos) {
         pos.x = MathUtils.clamp(pos.x, camera.viewportWidth / 2 * camera.zoom,
-                                worldHeight - camera.viewportWidth / 2 * camera.zoom);
+                                worldWidth - camera.viewportWidth / 2 * camera.zoom);
         pos.y = MathUtils.clamp(pos.y, camera.viewportHeight / 2 * camera.zoom,
-                                worldWidth - camera.viewportHeight / 2 * camera.zoom);
+                                worldHeight - camera.viewportHeight / 2 * camera.zoom);
         return pos;
     }
 
