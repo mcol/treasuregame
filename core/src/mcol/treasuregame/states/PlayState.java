@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
@@ -89,25 +88,9 @@ public class PlayState extends State {
     private void placeItems() {
         MapObjects objects = map.getObjects();
         for (MapObject obj : objects) {
-            MapProperties mp = obj.getProperties();
-            float x = (mp.get("x", float.class) * TreasureGame.SCALE);
-            float y = (mp.get("y", float.class) * TreasureGame.SCALE);
-            String type = mp.get("type", String.class);
-            try {
-                switch (type) {
-                    case "sweet":
-                        items.add(new Sweet(x, y, mp.get("value", int.class)));
-                        break;
-                    case "bomb":
-                        items.add(new Bomb(x, y));
-                        break;
-                    case "hurricane":
-                        items.add(new Hurricane(x, y));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                Gdx.app.log("getItems", x + " " + y);
-            }
+            Item item = ItemFactory.createItem(obj.getProperties());
+            if (item != null)
+                items.add(item);
         }
     }
 
