@@ -20,7 +20,7 @@ public class MovingHurricane extends AnimatedItem {
 
     /**  Constructor. */
     public MovingHurricane(float x, float y, Map map) {
-        super(x, y, 0, Assets.hurrTexture, 0.1f, 20f);
+        super(x, y, Assets.hurrTexture, 0.1f, 20f);
         this.map = map;
         animation.setPlayMode(Animation.PlayMode.LOOP);
         xSpeed = MathUtils.random(1, 3) * MathUtils.randomSign() * TreasureGame.TILESIZE;

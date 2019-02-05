@@ -2,7 +2,7 @@ package mcol.treasuregame.assets.items;
 
 import mcol.treasuregame.assets.Assets;
 
-public class Sweet extends Item {
+public class Sweet extends CollectableItem {
 
     /** Constructor. */
     public Sweet(float x, float y, int value) {

@@ -2,7 +2,7 @@ package mcol.treasuregame.assets.items;
 
 import mcol.treasuregame.assets.Assets;
 
-public class Bomb extends Item {
+public class Bomb extends CollectableItem {
 
     /** Constructor. */
     public Bomb(float x, float y) {

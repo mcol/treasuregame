@@ -16,17 +16,13 @@ public abstract class Item {
     /** Coordinates of the bottom left corner of the item in world units. */
     protected float x, y;
 
-    /** Points awarded by the item. */
-    protected int value;
-
     /** Collision bounding box. */
     protected Rectangle bounds;
 
     /** Constructor. */
-    public Item(float x, float y, int value, TextureRegion texture) {
+    public Item(float x, float y, TextureRegion texture) {
         this.x = x;
         this.y = y;
-        this.value = value;
         this.texture = texture;
         this.bounds = new Rectangle(x + SIZE / 4f, y + SIZE / 4f, SIZE / 2f, SIZE / 2f);
     }
@@ -39,19 +35,14 @@ public abstract class Item {
 
     // getters and setters
 
-    /** Gets the horizontal coordinate. */
+    /** Returns the horizontal coordinate in world units. */
     public float getX() {
         return x;
     }
 
-    /** Gets the vertical coordinate. */
+    /** Returns the vertical coordinate in world units. */
     public float getY() {
         return y;
-    }
-
-    /** Returns the value of the item. */
-    public int getValue() {
-        return value;
     }
 
     /** Returns the collision rectangle. */
@@ -59,7 +50,7 @@ public abstract class Item {
         return bounds;
     }
 
-    /** Returns whether the entity should be removed. */
+    /** Returns whether the item should be removed. */
     public boolean shouldRemove() {
         return false;
     }

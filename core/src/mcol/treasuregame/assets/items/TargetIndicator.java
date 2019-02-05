@@ -13,7 +13,7 @@ public class TargetIndicator extends AnimatedItem {
 
     /** Constructor. */
     public TargetIndicator(Player player) {
-        super(0, 0, 0, Assets.trgtTexture, 0.15f, 0);
+        super(0, 0, Assets.trgtTexture, 0.15f, 0);
         this.player = player;
         animation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
     }

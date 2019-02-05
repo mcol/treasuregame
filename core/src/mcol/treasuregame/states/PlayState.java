@@ -126,17 +126,14 @@ public class PlayState extends State {
         return pos;
     }
 
-    /** Checks for collisions between player and items. */
+    /** Checks for collisions between player and collectable items. */
     private void checkCollisionWithItems() {
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
+            if (!(item instanceof CollectableItem))
+                continue;
             if (item.getBounds().overlaps(player.getBounds())) {
-                if (item instanceof ArmedBomb ||
-                    item instanceof Explosion ||
-                    item instanceof MovingHurricane) {
-                    continue;
-                }
-                int value = item.getValue();
+                int value = ((CollectableItem) item).getValue();
                 if (value > 0) {
                     player.addScore(value);
                     messageManager.addMessage(Integer.toString(value),
@@ -179,7 +176,7 @@ public class PlayState extends State {
         float x = player.getX(), y = player.getY();
         float tx = 0, ty = 0, tempx, tempy;
         for (Item item : items) {
-            if (item instanceof AnimatedItem)
+            if (!(item instanceof CollectableItem))
                 continue;
             tempx = item.getX();
             tempy = item.getY();

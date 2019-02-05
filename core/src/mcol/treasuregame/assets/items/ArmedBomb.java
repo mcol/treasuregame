@@ -6,6 +6,6 @@ public class ArmedBomb extends AnimatedItem {
 
     /** Constructor. */
     public ArmedBomb(float x, float y) {
-        super((int) x, (int) y, 0, Assets.bombTexture, 0.2f, 1.2f);
+        super(x, y, Assets.bombTexture, 0.2f, 1.2f);
     }
 }

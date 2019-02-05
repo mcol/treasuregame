@@ -13,7 +13,7 @@ public class Explosion extends AnimatedItem {
 
     /** Constructor. */
     public Explosion(float x, float y, int radius) {
-        super(x, y, 0, Assets.explTexture, 0.1f, 0);
+        super(x, y, Assets.explTexture, 0.1f, 0);
         this.radius = radius;
         CameraShake.set(0.4f, 0.2f * radius);
     }

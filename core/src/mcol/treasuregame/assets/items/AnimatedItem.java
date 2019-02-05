@@ -15,10 +15,10 @@ public abstract class AnimatedItem extends Item {
     protected float stateTime;
 
     /** Constructor. */
-    public AnimatedItem(float x, float y, int value,
+    public AnimatedItem(float x, float y,
                         TextureRegion[] animationTexture,
                         float animationTime, float durationTime) {
-        super(x, y, value, null);
+        super(x, y, null);
         this.durationTime = durationTime;
         animation = new Animation<>(animationTime, animationTexture);
     }
