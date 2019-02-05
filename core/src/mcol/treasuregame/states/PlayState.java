@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
+import mcol.treasuregame.assets.ItemFactory;
 import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.assets.creatures.Creature;
 import mcol.treasuregame.assets.creatures.Lamb;

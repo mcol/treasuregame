@@ -1,8 +1,12 @@
-package mcol.treasuregame.assets.items;
+package mcol.treasuregame.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
 import mcol.treasuregame.TreasureGame;
+import mcol.treasuregame.assets.items.Bomb;
+import mcol.treasuregame.assets.items.Hurricane;
+import mcol.treasuregame.assets.items.Item;
+import mcol.treasuregame.assets.items.Sweet;
 
 public class ItemFactory {
 
