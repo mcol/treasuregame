@@ -35,7 +35,7 @@ public class Map {
     private final int[] backLayers;
 
     /** The texture used to render the fog. */
-    private TextureRegion fogTexture;
+    private final TextureRegion fogTexture;
 
     /** Width of the map in tiles. */
     private final int width;
