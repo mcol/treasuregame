@@ -4,12 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.gfx.Background;
+import mcol.treasuregame.gfx.Camera;
 
 public abstract class State implements Screen, InputProcessor {
 
@@ -20,7 +20,7 @@ public abstract class State implements Screen, InputProcessor {
     protected final SpriteBatch sb;
 
     /** Active camera. */
-    protected final OrthographicCamera camera;
+    protected final Camera camera;
 
     /** Game viewport. */
     protected final Viewport viewport;
@@ -32,7 +32,7 @@ public abstract class State implements Screen, InputProcessor {
     protected State(TreasureGame game, SpriteBatch sb) {
         this.game = game;
         this.sb = sb;
-        camera = new OrthographicCamera();
+        camera = new Camera();
         viewport = new ExtendViewport(TreasureGame.WIDTH, TreasureGame.HEIGHT, camera);
         viewport.apply(true);
     }

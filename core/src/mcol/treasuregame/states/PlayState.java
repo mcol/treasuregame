@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.ItemFactory;
@@ -15,7 +14,6 @@ import mcol.treasuregame.assets.creatures.Creature;
 import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
 import mcol.treasuregame.assets.items.*;
-import mcol.treasuregame.gfx.CameraShake;
 import mcol.treasuregame.gfx.HUD;
 import mcol.treasuregame.gfx.MessageManager;
 import mcol.treasuregame.utils.Utils;
@@ -39,12 +37,6 @@ public class PlayState extends State {
     /** Heads-up display. */
     private HUD hud;
 
-    /** Height of the world in world units. */
-    private float worldWidth;
-
-    /** Width of the world in world units. */
-    private float worldHeight;
-
     /** Container for all items. */
     private ArrayList<Item> items;
 
@@ -67,8 +59,7 @@ public class PlayState extends State {
     /** Initializes the world. */
     private void initializeWorld(int level) {
         map = new Map(sb, level);
-        worldWidth = map.getWidth();
-        worldHeight = map.getHeight();
+        camera.setWorldSize(map.getWidth(), map.getHeight());
         items = new ArrayList<>();
         creatures = new ArrayList<>();
         creatures.add(player);
@@ -99,32 +90,6 @@ public class PlayState extends State {
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
             game.setScreen(new MenuState(game, sb));
-    }
-
-    /** Moves the camera so that the player is at the centre. */
-    private void centreCameraOnPlayer(float dt) {
-
-        // position the camera is aiming to move to
-        Vector3 pos = player.getPosition().cpy();
-
-        // move gradually towards the target
-        pos = limitCamera(pos);
-        float tween = 4f;
-        float dist = pos.dst(camera.position);
-        if (dist < 1 / tween) {
-            tween = Utils.clampValue(1 / dist, tween, 10);
-        }
-        camera.position.lerp(pos, tween * dt);
-        camera.update();
-    }
-
-    /** Checks the map bounds to avoid showing blank space outside of the map. */
-    private Vector3 limitCamera(Vector3 pos) {
-        pos.x = MathUtils.clamp(pos.x, camera.viewportWidth / 2 * camera.zoom,
-                                worldWidth - camera.viewportWidth / 2 * camera.zoom);
-        pos.y = MathUtils.clamp(pos.y, camera.viewportHeight / 2 * camera.zoom,
-                                worldHeight - camera.viewportHeight / 2 * camera.zoom);
-        return pos;
     }
 
     /** Checks for collisions between player and collectable items. */
@@ -228,11 +193,9 @@ public class PlayState extends State {
             }
         }
 
+        camera.update(dt, player.getPosition());
         targetIndicator.update(dt);
         messageManager.update(dt);
-        centreCameraOnPlayer(dt);
-        if (CameraShake.isShaking())
-            camera.translate(CameraShake.update(dt));
 
         hud.setScore();
     }
