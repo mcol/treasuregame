@@ -28,6 +28,9 @@ public abstract class Creature {
     /** Animations representing the creature. */
     protected Animation<TextureRegion> dn, lt, rt, up;
 
+    /** Texture corresponding to the current animation frame. */
+    protected TextureRegion frame;
+
     /** Movement speed. */
     protected final float speed;
 
@@ -84,6 +87,25 @@ public abstract class Creature {
         path = PathFinder.findPath(map, currentTile, targetTile);
     }
 
+    /** Selects the current animation frame. */
+    private void selectCurrentFame() {
+        float idx = walking ? stateTime : 0f;
+        switch (dir) {
+            case UP:
+                frame = up.getKeyFrame(idx);
+                break;
+            case DOWN:
+                frame = dn.getKeyFrame(idx);
+                break;
+            case LEFT:
+                frame = lt.getKeyFrame(idx);
+                break;
+            case RIGHT:
+                frame = rt.getKeyFrame(idx);
+                break;
+        }
+    }
+
     public void update(float dt) {
         dt = Math.min(dt, 1 / 30f);
         stateTime += dt;
@@ -114,25 +136,10 @@ public abstract class Creature {
 
         currentTile = Utils.toTile(position);
         bounds.setPosition(position.x, position.y);
+        selectCurrentFame();
     }
 
     public void render(SpriteBatch sb) {
-        TextureRegion frame = null;
-        float idx = walking ? stateTime : 0f;
-        switch (dir) {
-            case UP:
-                frame = up.getKeyFrame(idx);
-                break;
-            case DOWN:
-                frame = dn.getKeyFrame(idx);
-                break;
-            case LEFT:
-                frame = lt.getKeyFrame(idx);
-                break;
-            case RIGHT:
-                frame = rt.getKeyFrame(idx);
-                break;
-        }
         sb.draw(frame, position.x, position.y, SIZE, SIZE);
     }
 
