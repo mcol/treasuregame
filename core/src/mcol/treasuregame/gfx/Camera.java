@@ -22,8 +22,12 @@ public class Camera extends OrthographicCamera {
 
     public void update(float dt, Vector3 target) {
         centreCamera(target, dt);
+
         if (CameraShake.isShaking()) {
-            translate(CameraShake.update(dt));
+            CameraShake.update(dt);
+            translate(CameraShake.getTranslation());
+            float currentAngle = (float) Math.atan2(up.x, up.y) * MathUtils.radiansToDegrees;
+            rotate(CameraShake.getRotation() - currentAngle);
         }
     }
 
