@@ -19,6 +19,12 @@ public abstract class Item {
     /** Collision bounding box. */
     protected Rectangle bounds;
 
+    /** Whether the item is collectable. */
+    protected boolean collectable;
+
+    /** Points awarded by the item. */
+    protected int value;
+
     /** Constructor. */
     public Item(float x, float y, TextureRegion texture) {
         this.x = x;
@@ -48,6 +54,16 @@ public abstract class Item {
     /** Returns the collision rectangle. */
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    /** Returns the value of the item. */
+    public int getValue() {
+        return value;
+    }
+
+    /** Returns whether the item is collectable. */
+    public boolean isCollectable() {
+        return collectable;
     }
 
     /** Returns whether the item should be removed. */

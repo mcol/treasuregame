@@ -96,10 +96,8 @@ public class PlayState extends State {
     private void checkCollisionWithItems() {
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
-            if (!(item instanceof CollectableItem))
-                continue;
-            if (item.getBounds().overlaps(player.getBounds())) {
-                int value = ((CollectableItem) item).getValue();
+            if (item.isCollectable() && item.getBounds().overlaps(player.getBounds())) {
+                int value = item.getValue();
                 if (value > 0) {
                     player.addScore(value);
                     messageManager.addMessage(Integer.toString(value),
@@ -142,7 +140,7 @@ public class PlayState extends State {
         float x = player.getX(), y = player.getY();
         float tx = 0, ty = 0, tempx, tempy;
         for (Item item : items) {
-            if (!(item instanceof CollectableItem))
+            if (!item.isCollectable())
                 continue;
             tempx = item.getX();
             tempy = item.getY();
