@@ -117,8 +117,8 @@ public class PlayState extends State {
         }
     }
 
-    /** Drops a bomb. */
-    private void dropBomb() {
+    /** Arms a bomb. */
+    private void armBomb() {
         items.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
         hud.resetCheckedButton();
@@ -162,7 +162,7 @@ public class PlayState extends State {
     protected void update(float dt) {
         handleInput();
         if (hud.isHoldingBomb())
-            dropBomb();
+            armBomb();
         if (hud.isHoldingLamb())
             releaseLamb();
 
