@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import mcol.treasuregame.TreasureGame;
+import mcol.treasuregame.utils.Utils;
 
 public class Map {
 
@@ -93,7 +94,9 @@ public class Map {
     }
 
     /** Removes the fog tiles in a radius around a point. */
-    public void destroyFog(int tx, int ty, int radius) {
+    public void destroyFog(float x, float y, int radius) {
+        int tx = Utils.toTile(x);
+        int ty = Utils.toTile(y);
         int xmin = Math.max(tx - radius, 0);
         int ymin = Math.max(ty - radius, 0) * width;
         int xmax = Math.min(tx + radius + 1, width);
@@ -104,9 +107,9 @@ public class Map {
     }
 
     /** Removes the obstacle tiles in a radius around a point. */
-    public void destroyObstacles(int tx, int ty, int radius) {
-        tx = tx - radius;
-        ty = ty - radius;
+    public void destroyObstacles(float x, float y, int radius) {
+        int tx = Utils.toTile(x) - radius;
+        int ty = Utils.toTile(y) - radius;
         int diameter = radius * 2 + 1;
         for (int j = 0, end = diameter * diameter; j < end; j++)
             obs.setCell(tx + j % diameter, ty + j / diameter, null);

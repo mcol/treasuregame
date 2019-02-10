@@ -130,8 +130,8 @@ public class PlayState extends State {
         float tx = item.getX();
         float ty = item.getY();
         items.add(new Explosion(tx, ty, radius));
-        map.destroyFog(Utils.toTile(tx), Utils.toTile(ty), radius);
-        map.destroyObstacles(Utils.toTile(tx), Utils.toTile(ty), radius);
+        map.destroyFog(tx, ty, radius);
+        map.destroyObstacles(tx, ty, radius);
     }
 
     /** Releases a lamb. */
@@ -170,9 +170,7 @@ public class PlayState extends State {
         for (int i = 0; i < creatures.size(); i++) {
             Creature creature = creatures.get(i);
             creature.update(dt);
-            int tx = Utils.toTile(creature.getPosition().x);
-            int ty = Utils.toTile(creature.getPosition().y);
-            map.destroyFog(tx, ty, creature.getFogRadius());
+            map.destroyFog(creature.getX(), creature.getY(), creature.getFogRadius());
             if (creature.shouldRemove())
                 creatures.remove(i);
         }

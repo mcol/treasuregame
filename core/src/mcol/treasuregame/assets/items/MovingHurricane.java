@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.MathUtils;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.Map;
-import mcol.treasuregame.utils.Utils;
 
 public class MovingHurricane extends AnimatedItem {
 
@@ -53,6 +52,6 @@ public class MovingHurricane extends AnimatedItem {
     public void update(float dt) {
         super.update(dt);
         move(dt);
-        map.destroyFog(Utils.toTile(x), Utils.toTile(y), 1);
+        map.destroyFog(x, y, 1);
     }
 }
