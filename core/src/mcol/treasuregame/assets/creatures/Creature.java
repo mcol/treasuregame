@@ -64,8 +64,8 @@ public abstract class Creature {
     /** Timer for the animation state. */
     protected float stateTime;
 
-    /** Whether the walking animation should be used. */
-    protected boolean walking;
+    /** Whether the moving animation should be used. */
+    protected boolean moving;
 
     /** Constructor. */
     public Creature(float x, float y, float speed, int fogRadius) {
@@ -89,7 +89,7 @@ public abstract class Creature {
 
     /** Selects the current animation frame. */
     private void selectCurrentFame() {
-        float idx = walking ? stateTime : 0f;
+        float idx = moving ? stateTime : 0f;
         switch (dir) {
             case UP:
                 frame = up.getKeyFrame(idx);
@@ -109,7 +109,7 @@ public abstract class Creature {
     public void update(float dt) {
         dt = Math.min(dt, 1 / 30f);
         stateTime += dt;
-        walking = false;
+        moving = false;
 
         if (Math.abs(target.x - position.x) < MIN_STEP)
             position.x = target.x;
@@ -131,7 +131,7 @@ public abstract class Creature {
 
             velocity.scl(dt);
             position.add(velocity);
-            walking = true;
+            moving = true;
         }
 
         currentTile = Utils.toTile(position);
@@ -187,9 +187,9 @@ public abstract class Creature {
         return path;
     }
 
-    /** Returns whether the creature is walking. */
-    public boolean isWalking() {
-        return walking;
+    /** Returns whether the creature is moving. */
+    public boolean isMoving() {
+        return moving;
     }
 
     /** Returns the amount of fog cleared by the creature. */

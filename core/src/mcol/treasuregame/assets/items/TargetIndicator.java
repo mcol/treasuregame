@@ -20,7 +20,7 @@ public class TargetIndicator extends AnimatedItem {
 
     @Override
     public void render(SpriteBatch sb) {
-        if (!player.isWalking())
+        if (!player.isMoving())
             return;
         sb.draw(animation.getKeyFrame(stateTime),
                 player.getTargetTile().x * TreasureGame.TILESIZE,

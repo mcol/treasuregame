@@ -38,6 +38,6 @@ public class Lamb extends Creature {
 
     @Override
     public boolean shouldRemove() {
-        return !walking && !map.hasFog((int) targetTile.x, (int) targetTile.y);
+        return !moving && !map.hasFog((int) targetTile.x, (int) targetTile.y);
     }
 }
