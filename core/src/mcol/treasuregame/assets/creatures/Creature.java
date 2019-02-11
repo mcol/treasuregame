@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Map;
+import mcol.treasuregame.gfx.MessageManager;
 import mcol.treasuregame.utils.PathFinder;
 import mcol.treasuregame.utils.Utils;
 
@@ -24,6 +25,9 @@ public abstract class Creature {
 
     /** Minimum movement before rounding to the tile edge. */
     private static final float MIN_STEP = 0.1f;
+
+    /** Container for all messages. */
+    protected static final MessageManager messageManager = new MessageManager();
 
     /** Animations representing the creature. */
     protected Animation<TextureRegion> dn, lt, rt, up;
@@ -146,6 +150,10 @@ public abstract class Creature {
 
     public void render(SpriteBatch sb) {
         sb.draw(frame, position.x, position.y, SIZE, SIZE);
+    }
+
+    public void renderMessages(SpriteBatch sb) {
+        messageManager.render(sb);
     }
 
     // getters and setters

@@ -15,7 +15,6 @@ import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
 import mcol.treasuregame.assets.items.*;
 import mcol.treasuregame.gfx.HUD;
-import mcol.treasuregame.gfx.MessageManager;
 import mcol.treasuregame.utils.Utils;
 
 import java.util.ArrayList;
@@ -43,9 +42,6 @@ public class PlayState extends State {
     /** Container for all creatures. */
     private ArrayList<Creature> creatures;
 
-    /** Container for all messages. */
-    private static MessageManager messageManager;
-
     /** Constructor. */
     public PlayState(TreasureGame game, SpriteBatch sb) {
         super(game, sb);
@@ -63,7 +59,6 @@ public class PlayState extends State {
         items = new ArrayList<>();
         creatures = new ArrayList<>();
         creatures.add(player);
-        messageManager = new MessageManager();
         hud = new HUD(sb, map, player);
         placeItems();
     }
@@ -100,16 +95,12 @@ public class PlayState extends State {
                 int value = item.getValue();
                 if (value > 0) {
                     player.addScore(value);
-                    messageManager.addMessage(Integer.toString(value),
-                                              item.getX(), item.getY());
                 }
                 if (item instanceof Hurricane) {
                     items.add(new MovingHurricane(item.getX(), item.getY()));
                 }
                 else if (item instanceof Bomb) {
                     player.addBomb();
-                    messageManager.addMessage("+1 bomb",
-                                              item.getX(), item.getY());
                 }
                 items.remove(i);
                 break;
@@ -182,7 +173,6 @@ public class PlayState extends State {
 
         camera.update(dt, player.getPosition());
         targetIndicator.update(dt);
-        messageManager.update(dt);
 
         hud.setScore();
     }
@@ -199,7 +189,7 @@ public class PlayState extends State {
         for (Item item : items)
             item.render(sb);
         map.renderFog(sb);
-        messageManager.render(sb);
+        player.renderMessages(sb);
         targetIndicator.render(sb);
         sb.end();
 

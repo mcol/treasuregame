@@ -49,12 +49,14 @@ public class Player extends Creature {
 
     /** Increments the score. */
     public void addScore(int value) {
+        messageManager.addMessage(Integer.toString(value), position.x, position.y);
         score += value;
         lambScore += value;
     }
 
     /** Adds a bomb. */
     public void addBomb() {
+        messageManager.addMessage("+1 bomb", position.x, position.y);
         bombs++;
     }
 
@@ -77,6 +79,7 @@ public class Player extends Creature {
             lambScore -= LAMB_COST;
             lambs++;
         }
+        messageManager.update(dt);
     }
 
     // getters and setters
