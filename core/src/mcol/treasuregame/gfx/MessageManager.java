@@ -54,8 +54,7 @@ public class MessageManager {
     }
 
     public void render(SpriteBatch sb) {
-        for (int i = 0; i < messages.size(); i++) {
-            Message msg = messages.get(i);
+        for (Message msg : messages) {
             BitFont.renderMessage(sb, msg.message, msg.x, msg.y,
                                   BitFont.Size.MICRO, BitFont.Align.CENTRE);
         }

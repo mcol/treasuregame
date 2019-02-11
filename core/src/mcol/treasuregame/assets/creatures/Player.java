@@ -36,7 +36,7 @@ public class Player extends Creature {
         super(x, y, SPEED, FOG_RADIUS);
         int row = character / 4 * 4;
         int col = character % 4 * 3;
-        TextureRegion[] d = Assets.playTexture[row + 0];
+        TextureRegion[] d = Assets.playTexture[row];
         TextureRegion[] l = Assets.playTexture[row + 1];
         TextureRegion[] r = Assets.playTexture[row + 2];
         TextureRegion[] u = Assets.playTexture[row + 3];

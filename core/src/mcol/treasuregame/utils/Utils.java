@@ -19,11 +19,6 @@ public class Utils {
                            (int) (coords.y / TreasureGame.TILESIZE), 0);
     }
 
-    /** Enforces a value to stay between two extremes. */
-    public static float clampValue(float x, float min, float max) {
-        return x < min ? min : x > max ? max : x;
-    }
-
     /** Creates a button with the given images. */
     public static Button createButton(TextureRegion[] upImage) {
         Button.ButtonStyle style = new Button.ButtonStyle();
