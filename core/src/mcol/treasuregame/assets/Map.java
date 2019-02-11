@@ -12,6 +12,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.utils.Utils;
 
+import java.util.Locale;
+
 public class Map {
 
     /** Identifier of the tile used for fog. */
@@ -49,7 +51,7 @@ public class Map {
 
     /** Constructor. */
     public Map(SpriteBatch sb, int level) {
-        map = Assets.get(String.format("maps/%02d.tmx", level), TiledMap.class);
+        map = Assets.get(String.format(Locale.US, "maps/%02d.tmx", level), TiledMap.class);
         mapRenderer = new OrthogonalTiledMapRenderer(map, TreasureGame.SCALE, sb);
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
         width = layer.getWidth();
