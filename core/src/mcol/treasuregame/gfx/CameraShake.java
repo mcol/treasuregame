@@ -15,7 +15,7 @@ public class CameraShake {
     private static float stateTime = 0;
 
     /** Position adjustment for the camera during the shake. */
-    private static Vector3 pos = new Vector3();
+    private static final Vector3 pos = new Vector3();
 
     /** Rotation adjustment for the camera during the shake. */
     private static float rot;

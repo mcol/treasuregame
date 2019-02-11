@@ -23,13 +23,13 @@ public class Map {
     private static final String OBS_LAYER_NAME = "Obs";
 
     /** The whole map. */
-    TiledMap map;
+    private final TiledMap map;
 
     /** The copy of the obstacles layer. */
-    TiledMapTileLayer obs;
+    private TiledMapTileLayer obs;
 
     /** The fog layer. */
-    boolean[] fog;
+    private final boolean[] fog;
 
     /** The map renderer. */
     private final TiledMapRenderer mapRenderer;

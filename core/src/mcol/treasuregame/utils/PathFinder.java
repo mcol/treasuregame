@@ -52,7 +52,7 @@ public class PathFinder {
     }
 
     /** Nodes to be examined. */
-    private static BinaryHeap<PathNode> bhopen = new BinaryHeap<>(200, false);
+    private static final BinaryHeap<PathNode> bhopen = new BinaryHeap<>(200, false);
 
     /** Correction factor for diagonal movements. */
     private static final float oct = (float) Math.sqrt(2) - 2;

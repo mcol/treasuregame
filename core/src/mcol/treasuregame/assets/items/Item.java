@@ -18,7 +18,7 @@ public abstract class Item {
     protected float x, y;
 
     /** Collision bounding box. */
-    protected Rectangle bounds;
+    protected final Rectangle bounds;
 
     /** Whether the item is collectable. */
     protected boolean collectable;

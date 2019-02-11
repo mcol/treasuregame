@@ -31,7 +31,7 @@ public class MessageManager {
     private static final float MESSAGE_DISPLAY_INTERVAL = 1.5f;
 
     /** List of messages. */
-    private static ArrayList<Message> messages = new ArrayList<>();
+    private static final ArrayList<Message> messages = new ArrayList<>();
 
     /** Adds a message to the list. */
     public void addMessage(String message, float x, float y) {
