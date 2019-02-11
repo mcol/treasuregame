@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
+import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.gfx.CameraShake;
 
 public class Explosion extends AnimatedItem {
@@ -16,6 +17,12 @@ public class Explosion extends AnimatedItem {
         super(x, y, Assets.explTexture, 0.1f, 0);
         this.radius = radius;
         CameraShake.set(0.4f, 0.2f * radius);
+    }
+
+    @Override
+    public void destroy(Map map) {
+        map.destroyFog(x, y, radius);
+        map.destroyObstacles(x, y, radius);
     }
 
     @Override

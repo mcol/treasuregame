@@ -106,6 +106,11 @@ public abstract class Creature {
         }
     }
 
+    /** Destroys elements of the map. */
+    public void destroy(Map map) {
+        map.destroyFog(position.x, position.y, fogRadius);
+    }
+
     public void update(float dt) {
         dt = Math.min(dt, 1 / 30f);
         stateTime += dt;
@@ -190,11 +195,6 @@ public abstract class Creature {
     /** Returns whether the creature is moving. */
     public boolean isMoving() {
         return moving;
-    }
-
-    /** Returns the amount of fog cleared by the creature. */
-    public int getFogRadius() {
-        return fogRadius;
     }
 
     /** Returns whether the creature should be removed. */

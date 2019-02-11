@@ -49,9 +49,13 @@ public class MovingHurricane extends AnimatedItem {
     }
 
     @Override
+    public void destroy(Map map) {
+        map.destroyFog(x, y, 1);
+    }
+
+    @Override
     public void update(float dt) {
         super.update(dt);
         move(dt);
-        map.destroyFog(x, y, 1);
     }
 }

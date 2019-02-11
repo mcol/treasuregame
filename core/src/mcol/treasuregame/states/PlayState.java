@@ -124,16 +124,6 @@ public class PlayState extends State {
         hud.resetCheckedButton();
     }
 
-    /** Explodes the bomb. */
-    private void explodeBomb(Item item) {
-        int radius = 3;
-        float tx = item.getX();
-        float ty = item.getY();
-        items.add(new Explosion(tx, ty, radius));
-        map.destroyFog(tx, ty, radius);
-        map.destroyObstacles(tx, ty, radius);
-    }
-
     /** Releases a lamb. */
     private void releaseLamb() {
         float maxDist = 0, dist;
@@ -170,7 +160,7 @@ public class PlayState extends State {
         for (int i = 0; i < creatures.size(); i++) {
             Creature creature = creatures.get(i);
             creature.update(dt);
-            map.destroyFog(creature.getX(), creature.getY(), creature.getFogRadius());
+            creature.destroy(map);
             if (creature.shouldRemove())
                 creatures.remove(i);
         }
@@ -182,10 +172,11 @@ public class PlayState extends State {
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             item.update(dt);
+            item.destroy(map);
             if (item.shouldRemove()) {
                 items.remove(i);
                 if (item instanceof ArmedBomb)
-                    explodeBomb(item);
+                    items.add(new Explosion(item.getX(), item.getY(), 3));
             }
         }
 

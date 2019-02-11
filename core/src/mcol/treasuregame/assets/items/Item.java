@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import mcol.treasuregame.TreasureGame;
+import mcol.treasuregame.assets.Map;
 
 public abstract class Item {
 
@@ -32,6 +33,9 @@ public abstract class Item {
         this.texture = texture;
         this.bounds = new Rectangle(x + SIZE / 4f, y + SIZE / 4f, SIZE / 2f, SIZE / 2f);
     }
+
+    /** Destroys elements of the map. */
+    public void destroy(Map map) { /* nothing to do */ }
 
     public void update(float dt) { /* nothing to do */ }
 
