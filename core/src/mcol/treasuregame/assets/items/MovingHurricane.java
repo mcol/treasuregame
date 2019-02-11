@@ -8,9 +8,6 @@ import mcol.treasuregame.assets.Map;
 
 public class MovingHurricane extends AnimatedItem {
 
-    /** The world map. */
-    private final Map map;
-
     /** Movement speed in the two directions. */
     private float xSpeed, ySpeed;
 
@@ -18,9 +15,8 @@ public class MovingHurricane extends AnimatedItem {
     private float xNextChange, yNextChange;
 
     /**  Constructor. */
-    public MovingHurricane(float x, float y, Map map) {
+    public MovingHurricane(float x, float y) {
         super(x, y, Assets.hurrTexture, 0.1f, 20f);
-        this.map = map;
         animation.setPlayMode(Animation.PlayMode.LOOP);
         xSpeed = MathUtils.random(1, 3) * MathUtils.randomSign() * TreasureGame.TILESIZE;
         ySpeed = MathUtils.random(1, 3) * MathUtils.randomSign() * TreasureGame.TILESIZE;
@@ -40,16 +36,15 @@ public class MovingHurricane extends AnimatedItem {
         }
         x += xSpeed * dt;
         y += ySpeed * dt;
+    }
 
+    @Override
+    public void destroy(Map map) {
         // don't go outside of the map
         if (x < -0.5 || x > map.getWidth() - 0.5)
             xSpeed *= -1;
         if (y < -0.5 || y > map.getHeight() - 0.5)
             ySpeed *= -1;
-    }
-
-    @Override
-    public void destroy(Map map) {
         map.destroyFog(x, y, 1);
     }
 

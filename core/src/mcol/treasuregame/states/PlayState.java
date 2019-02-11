@@ -104,7 +104,7 @@ public class PlayState extends State {
                                               item.getX(), item.getY());
                 }
                 if (item instanceof Hurricane) {
-                    items.add(new MovingHurricane(item.getX(), item.getY(), map));
+                    items.add(new MovingHurricane(item.getX(), item.getY()));
                 }
                 else if (item instanceof Bomb) {
                     player.addBomb();
