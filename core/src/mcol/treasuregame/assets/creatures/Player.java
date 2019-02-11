@@ -13,9 +13,6 @@ public class Player extends Creature {
     /** Movement speed. */
     private static final float SPEED = 4 * TreasureGame.TILESIZE;
 
-    /** Amount of fog cleared in each direction. */
-    private static final int FOG_RADIUS = 1;
-
     /** Cost of a lamb. */
     private static final int LAMB_COST = 20;
 
@@ -33,7 +30,7 @@ public class Player extends Creature {
 
     /** Constructor. */
     public Player(float x, float y, int character) {
-        super(x, y, SPEED, FOG_RADIUS);
+        super(x, y, SPEED, 1);
         int row = character / 4 * 4;
         int col = character % 4 * 3;
         TextureRegion[] d = Assets.playTexture[row];

@@ -13,15 +13,12 @@ public class Lamb extends Creature {
     /** Movement speed. */
     private static final float SPEED = 3 * TreasureGame.TILESIZE;
 
-    /** Amount of fog cleared in each direction. */
-    private static final int FOG_RADIUS = 1;
-
     /** The world map. */
     private final Map map;
 
     /** Constructor. */
     public Lamb(float x, float y, float xTarget, float yTarget, Map map) {
-        super(x, y, SPEED, FOG_RADIUS);
+        super(x, y, SPEED, 1);
         this.map = map;
         dn = new Animation<>(ANIMATION_TIME, Assets.lambTexture[0]);
         lt = new Animation<>(ANIMATION_TIME, Assets.lambTexture[1]);
