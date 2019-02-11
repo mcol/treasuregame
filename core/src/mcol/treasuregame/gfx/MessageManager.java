@@ -1,6 +1,6 @@
 package mcol.treasuregame.gfx;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import mcol.treasuregame.TreasureGame;
 
@@ -48,12 +48,12 @@ public class MessageManager {
                 i--;
                 continue;
             }
-            msg.y += MathUtils.random(0, 3) * TreasureGame.TILESIZE * dt;
             msg.x += MathUtils.random(-2, 2) * TreasureGame.TILESIZE * dt;
+            msg.y += MathUtils.random(0, 3) * TreasureGame.TILESIZE * dt;
         }
     }
 
-    public void render(SpriteBatch sb) {
+    public void render(Batch sb) {
         for (Message msg : messages) {
             BitFont.renderMessage(sb, msg.message, msg.x, msg.y,
                                   BitFont.Size.MICRO, BitFont.Align.CENTRE);
