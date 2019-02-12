@@ -37,13 +37,13 @@ public class BitFont {
 
     /** Renders a message using the font characters. */
     public static void renderMessage(Batch sb, String msg, float x, float y,
-                                     Size size, Align alignment) {
+                                     float size, Align alignment) {
 
         // adjust the position if the message is centred or right aligned
         if (alignment == Align.CENTRE)
-            x -= msg.length() * size.scale / 2;
+            x -= msg.length() * size / 2;
         else if (alignment == Align.RIGHT)
-            x -= msg.length() * size.scale;
+            x -= msg.length() * size;
 
         // convert to uppercase before matching
         msg = msg.toUpperCase();
@@ -56,7 +56,13 @@ public class BitFont {
                 continue;
 
             sb.draw(Assets.fontTexture[charIndex],
-                    x + i * size.scale, y, size.scale, size.scale);
+                    x + i * size, y, size, size);
         }
+    }
+
+    /** Renders a message using the font characters. */
+    public static void renderMessage(Batch sb, String msg, float x, float y,
+                                     Size size, Align alignment) {
+        renderMessage(sb, msg, x, y, size.scale, alignment);
     }
 }
