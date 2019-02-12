@@ -1,7 +1,7 @@
 package mcol.treasuregame.assets.items;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.creatures.Player;
@@ -19,7 +19,7 @@ public class TargetIndicator extends AnimatedItem {
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(Batch sb) {
         if (!player.isMoving())
             return;
         sb.draw(animation.getKeyFrame(stateTime),

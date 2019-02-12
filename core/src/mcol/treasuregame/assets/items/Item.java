@@ -1,6 +1,6 @@
 package mcol.treasuregame.assets.items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import mcol.treasuregame.TreasureGame;
@@ -39,7 +39,7 @@ public abstract class Item {
 
     public void update(float dt) { /* nothing to do */ }
 
-    public void render(SpriteBatch sb) {
+    public void render(Batch sb) {
         sb.draw(texture, x, y, SIZE, SIZE);
     }
 

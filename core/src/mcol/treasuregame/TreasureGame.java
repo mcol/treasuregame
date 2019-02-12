@@ -1,6 +1,7 @@
 package mcol.treasuregame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.states.MenuState;
@@ -26,7 +27,7 @@ public class TreasureGame extends Game {
     public static final String TITLE = "TreasureGame";
 
     /** Object to batch the drawing of the graphics. */
-    private SpriteBatch batch;
+    private Batch batch;
 
     /** Asset manager. */
     private Assets assets;

@@ -2,7 +2,6 @@ package mcol.treasuregame.assets;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -50,7 +49,7 @@ public class Map {
     private boolean showFog;
 
     /** Constructor. */
-    public Map(SpriteBatch sb, int level) {
+    public Map(Batch sb, int level) {
         map = Assets.get(String.format(Locale.US, "maps/%02d.tmx", level), TiledMap.class);
         mapRenderer = new OrthogonalTiledMapRenderer(map, TreasureGame.SCALE, sb);
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);

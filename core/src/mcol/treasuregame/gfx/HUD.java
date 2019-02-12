@@ -2,7 +2,7 @@ package mcol.treasuregame.gfx;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -33,7 +33,7 @@ public class HUD implements Disposable {
     private Button playButton, bombButton, lambButton;
 
     /** Constructor. */
-    public HUD(SpriteBatch sb, Map map, Player player) {
+    public HUD(Batch sb, Map map, Player player) {
         this.player = player;
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), sb);
         createUI();

@@ -3,7 +3,7 @@ package mcol.treasuregame.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector3;
@@ -43,7 +43,7 @@ public class PlayState extends State {
     private ArrayList<Creature> creatures;
 
     /** Constructor. */
-    public PlayState(TreasureGame game, SpriteBatch sb) {
+    public PlayState(TreasureGame game, Batch sb) {
         super(game, sb);
         player = new Player(12, 12, 0);
         targetIndicator = new TargetIndicator(player);

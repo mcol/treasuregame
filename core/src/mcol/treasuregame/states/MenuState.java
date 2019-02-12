@@ -2,7 +2,7 @@ package mcol.treasuregame.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,7 +17,7 @@ public class MenuState extends State {
     private final Stage stage;
 
     /** Constructor. */
-    public MenuState(final TreasureGame game, final SpriteBatch sb) {
+    public MenuState(final TreasureGame game, final Batch sb) {
         super(game, sb);
         stage = new Stage(viewport, sb);
         background = new Background(Assets.menubg, 0.03f, 0.3f);

@@ -1,7 +1,7 @@
 package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -148,11 +148,11 @@ public abstract class Creature {
         selectCurrentFame();
     }
 
-    public void render(SpriteBatch sb) {
+    public void render(Batch sb) {
         sb.draw(frame, position.x, position.y, SIZE, SIZE);
     }
 
-    public void renderMessages(SpriteBatch sb) {
+    public void renderMessages(Batch sb) {
         messageManager.render(sb);
     }
 

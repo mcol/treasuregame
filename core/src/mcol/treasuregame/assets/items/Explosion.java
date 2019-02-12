@@ -1,6 +1,6 @@
 package mcol.treasuregame.assets.items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
@@ -26,7 +26,7 @@ public class Explosion extends AnimatedItem {
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(Batch sb) {
         TextureRegion frame = animation.getKeyFrame(stateTime);
         float tx = x - radius * TreasureGame.TILESIZE;
         float ty = y - radius * TreasureGame.TILESIZE;

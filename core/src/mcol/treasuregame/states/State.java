@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import mcol.treasuregame.TreasureGame;
@@ -17,7 +17,7 @@ public abstract class State implements Screen, InputProcessor {
     protected final TreasureGame game;
 
     /** Object to batch the drawing of the game graphics. */
-    protected final SpriteBatch sb;
+    protected final Batch sb;
 
     /** Active camera. */
     protected final Camera camera;
@@ -29,7 +29,7 @@ public abstract class State implements Screen, InputProcessor {
     protected Background background;
 
     /** Constructor. */
-    protected State(TreasureGame game, SpriteBatch sb) {
+    protected State(TreasureGame game, Batch sb) {
         this.game = game;
         this.sb = sb;
         camera = new Camera();
