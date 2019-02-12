@@ -1,14 +1,10 @@
 package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
+import mcol.treasuregame.assets.ItemManager;
 import mcol.treasuregame.assets.Map;
-import mcol.treasuregame.assets.items.Item;
-
-import java.util.List;
 
 public class Lamb extends Creature {
 
@@ -36,30 +32,14 @@ public class Lamb extends Creature {
     }
 
     /** Decides the target to move to. */
-    public void setTarget(List<Item> items) {
+    public void setTarget(ItemManager items) {
         int attempts = 10;
-        getRandomCollectableItemCoordinates(items, target);
+        items.getRandomCollectableItemCoordinates(target);
         while (!map.hasFog(target.x, target.y) && attempts > 0) {
-            getRandomCollectableItemCoordinates(items, target);
+            items.getRandomCollectableItemCoordinates(target);
             attempts--;
         }
         findPathToTarget(map, target);
-    }
-
-    /** Returns the coordinates of a random collectable item. */
-    private void getRandomCollectableItemCoordinates(List<Item> items, Vector3 coords) {
-        int numberOfCollectableItems = 0;
-        for (Item item : items) {
-            if (item.isCollectable())
-                numberOfCollectableItems++;
-        }
-        if (numberOfCollectableItems > 0) {
-            Item item = items.get(MathUtils.random(items.size() - 1));
-            while (!item.isCollectable())
-                item = items.get(MathUtils.random(items.size() - 1));
-            coords.x = item.getX();
-            coords.y = item.getY();
-        }
     }
 
     @Override

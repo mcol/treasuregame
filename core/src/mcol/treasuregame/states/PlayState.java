@@ -9,11 +9,14 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.ItemFactory;
+import mcol.treasuregame.assets.ItemManager;
 import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.assets.creatures.Creature;
 import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
-import mcol.treasuregame.assets.items.*;
+import mcol.treasuregame.assets.items.ArmedBomb;
+import mcol.treasuregame.assets.items.Item;
+import mcol.treasuregame.assets.items.TargetIndicator;
 import mcol.treasuregame.gfx.HUD;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public class PlayState extends State {
     private HUD hud;
 
     /** Container for all items. */
-    private ArrayList<Item> items;
+    private ItemManager itemManager;
 
     /** Container for all creatures. */
     private ArrayList<Creature> creatures;
@@ -55,7 +58,7 @@ public class PlayState extends State {
     private void initializeWorld(int level) {
         map = new Map(sb, level);
         camera.setWorldSize(map.getWidth(), map.getHeight());
-        items = new ArrayList<>();
+        itemManager = new ItemManager();
         creatures = new ArrayList<>();
         creatures.add(player);
         hud = new HUD(sb, map, player);
@@ -76,7 +79,7 @@ public class PlayState extends State {
         for (MapObject obj : objects) {
             Item item = ItemFactory.createItem(obj.getProperties());
             if (item != null)
-                items.add(item);
+                itemManager.add(item);
         }
     }
 
@@ -86,30 +89,9 @@ public class PlayState extends State {
             game.setScreen(new MenuState(game, sb));
     }
 
-    /** Checks for collisions between player and collectable items. */
-    private void checkCollisionWithItems() {
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            if (item.isCollectable() && item.getBounds().overlaps(player.getBounds())) {
-                int value = item.getValue();
-                if (value > 0) {
-                    player.addScore(value);
-                }
-                if (item instanceof Hurricane) {
-                    items.add(new MovingHurricane(item.getX(), item.getY()));
-                }
-                else if (item instanceof Bomb) {
-                    player.addBomb();
-                }
-                items.remove(i);
-                break;
-            }
-        }
-    }
-
     /** Arms a bomb. */
     private void armBomb() {
-        items.add(new ArmedBomb(player.getX(), player.getY()));
+        itemManager.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
         hud.resetCheckedButton();
     }
@@ -117,7 +99,7 @@ public class PlayState extends State {
     /** Releases a lamb. */
     private void releaseLamb() {
         Lamb lamb = new Lamb(player.getX(), player.getY(), map);
-        lamb.setTarget(items);
+        lamb.setTarget(itemManager);
         creatures.add(lamb);
         player.removeLamb();
         hud.resetCheckedButton();
@@ -140,20 +122,10 @@ public class PlayState extends State {
                 creatures.remove(i);
         }
 
-        // check for collisions between player and items
-        checkCollisionWithItems();
-
         // update all items
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            item.update(dt);
-            item.destroy(map);
-            if (item.shouldRemove()) {
-                items.remove(i);
-                if (item instanceof ArmedBomb)
-                    items.add(new Explosion(item.getX(), item.getY(), 3));
-            }
-        }
+        itemManager.checkCollisions(player);
+        itemManager.update(dt);
+        itemManager.destroy(map);
 
         camera.update(dt, player.getPosition());
         targetIndicator.update(dt);
@@ -170,8 +142,7 @@ public class PlayState extends State {
         sb.begin();
         for (Creature creature : creatures)
             creature.render(sb);
-        for (Item item : items)
-            item.render(sb);
+        itemManager.render(sb);
         map.renderFog(sb);
         player.renderMessages(sb);
         targetIndicator.render(sb);
