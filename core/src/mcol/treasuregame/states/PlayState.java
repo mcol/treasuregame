@@ -15,7 +15,6 @@ import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
 import mcol.treasuregame.assets.items.*;
 import mcol.treasuregame.gfx.HUD;
-import mcol.treasuregame.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -117,24 +116,9 @@ public class PlayState extends State {
 
     /** Releases a lamb. */
     private void releaseLamb() {
-        float maxDist = 0, dist;
-        float x = player.getX(), y = player.getY();
-        float tx = 0, ty = 0, tempx, tempy;
-        for (Item item : items) {
-            if (!item.isCollectable())
-                continue;
-            tempx = item.getX();
-            tempy = item.getY();
-            if (!map.hasFog(Utils.toTile(tempx), Utils.toTile(tempy)))
-                continue;
-            dist = Math.abs(tempx - x) + Math.abs(tempy - y);
-            if (dist > maxDist) {
-                maxDist = dist;
-                tx = tempx;
-                ty = tempy;
-            }
-        }
-        creatures.add(new Lamb(x, y, tx, ty, map));
+        Lamb lamb = new Lamb(player.getX(), player.getY(), map);
+        lamb.setTarget(items);
+        creatures.add(lamb);
         player.removeLamb();
         hud.resetCheckedButton();
     }

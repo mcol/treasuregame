@@ -159,6 +159,11 @@ public class Map {
         return fog[x + y * width];
     }
 
+    /** Returns whether there is fog at the given world coordinates. */
+    public boolean hasFog(float x, float y) {
+        return hasFog(Utils.toTile(x), Utils.toTile(y));
+    }
+
     /** Returns the width of the map in world units. */
     public float getWidth() {
         return width * TreasureGame.TILESIZE;
