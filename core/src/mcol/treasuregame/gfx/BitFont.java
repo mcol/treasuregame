@@ -18,8 +18,13 @@ public class BitFont {
     /** Available font sizes. */
     public enum Size {
 
-        /** Available sizes */
-        TITLE(6.0f), LARGE(4.0f), MEDIUM(2.0f), SMALL(1.0f), MICRO(0.6f), TINY(0.3f);
+        /** Predefined sizes. */
+        TITLE(6.0f),
+        LARGE(4.0f),
+        MEDIUM(2.0f),
+        SMALL(1.0f),
+        MICRO(0.6f),
+        TINY(0.3f);
 
         /** Scaling factor. */
         private final float scale;
