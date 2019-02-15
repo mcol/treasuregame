@@ -28,7 +28,7 @@ public class MessageManager {
     }
 
     /** Interval for which the message is displayed in seconds. */
-    private static final float MESSAGE_DISPLAY_INTERVAL = 1.5f;
+    private static final float MESSAGE_DISPLAY_INTERVAL = 2.5f;
 
     /** List of messages. */
     private static final ArrayList<Message> messages = new ArrayList<>();
