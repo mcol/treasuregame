@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import mcol.treasuregame.assets.Assets;
 import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.assets.creatures.Player;
-import mcol.treasuregame.utils.Utils;
 
 public class HUD implements Disposable {
 
@@ -30,7 +28,9 @@ public class HUD implements Disposable {
     private Label scoreLabel;
 
     /** Buttons in the HUD. */
-    private Button playButton, bombButton, lambButton;
+    private UIButton playButton;
+    private UIButton bombButton;
+    private UIButton lambButton;
 
     /** Constructor. */
     public HUD(Batch sb, Map map, Player player) {
@@ -47,9 +47,9 @@ public class HUD implements Disposable {
                                                            Color.WHITE);
         scoreLabel = new Label(String.format(scoreFormat, 0), labelStyle);
 
-        playButton = Utils.createButton(Assets.buttonPlayTexture);
-        bombButton = Utils.createButton(Assets.buttonBombTexture);
-        lambButton = Utils.createButton(Assets.buttonLambTexture);
+        playButton = new UIButton(Assets.buttonPlayTexture);
+        bombButton = new UIButton(Assets.buttonBombTexture);
+        lambButton = new UIButton(Assets.buttonLambTexture);
         playButton.setChecked(true);
 
         // table to organize the buttons
@@ -57,7 +57,9 @@ public class HUD implements Disposable {
         btns.add(playButton).padRight(2);
         btns.add(bombButton).padRight(2);
         btns.add(lambButton);
-        new ButtonGroup<Button>(playButton, bombButton, lambButton);
+        new ButtonGroup<>(playButton,
+                          bombButton,
+                          lambButton);
 
         // table to organize the labels
         Table table = new Table().right().padRight(20);
