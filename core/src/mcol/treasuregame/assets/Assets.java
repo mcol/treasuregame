@@ -16,6 +16,7 @@ public class Assets {
     public static Texture iconTexture;
     public static Texture exitTexture;
     public static TextureRegion[] buttonBombTexture;
+    public static TextureRegion[] buttonHurrTexture;
     public static TextureRegion[] buttonLambTexture;
     public static TextureRegion[] buttonPlayTexture;
     public static TextureRegion[] bombTexture;
@@ -43,6 +44,7 @@ public class Assets {
         // play state
         assets.load("bomb.png", Texture.class);
         assets.load("button-bomb.png", Texture.class);
+        assets.load("button-hurricane.png", Texture.class);
         assets.load("button-lamb.png", Texture.class);
         assets.load("button-player.png", Texture.class);
         assets.load("explosion.png", Texture.class);
@@ -71,6 +73,7 @@ public class Assets {
     public void finishLoading() {
         assets.finishLoading();
         buttonBombTexture = TextureRegion.split(assets.get("button-bomb.png", Texture.class), 100, 110)[0];
+        buttonHurrTexture = TextureRegion.split(assets.get("button-hurricane.png", Texture.class), 100, 110)[0];
         buttonLambTexture = TextureRegion.split(assets.get("button-lamb.png", Texture.class), 100, 110)[0];
         buttonPlayTexture = TextureRegion.split(assets.get("button-player.png", Texture.class), 100, 110)[0];
         bombTexture = TextureRegion.split(assets.get("bomb.png", Texture.class), 16, 16)[0];

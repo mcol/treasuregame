@@ -43,7 +43,7 @@ public class ItemManager {
                 if (value > 0)
                     player.addScore(value);
                 if (item instanceof Hurricane)
-                    items.add(new MovingHurricane(item.getX(), item.getY()));
+                    player.addHurricane();
                 else if (item instanceof Bomb)
                     player.addBomb();
                 items.remove(item);

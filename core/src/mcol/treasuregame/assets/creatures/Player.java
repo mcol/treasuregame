@@ -25,6 +25,9 @@ public class Player extends Creature {
     /** Number of bombs available. */
     private int bombs;
 
+    /** Number of hurricanes available. */
+    private int hurricanes;
+
     /** Number of lambs available. */
     private int lambs;
 
@@ -66,6 +69,18 @@ public class Player extends Creature {
             bombs--;
     }
 
+    /** Adds a hurricane. */
+    public void addHurricane() {
+        messageManager.addMessage("+1 hurricane", position.x, position.y);
+        hurricanes++;
+    }
+
+    /** Removes a hurricane. */
+    public void removeHurricane() {
+        if (hurricanes > 0)
+            hurricanes--;
+    }
+
     /** Removes a lamb. */
     public void removeLamb() {
         if (lambs > 0)
@@ -92,6 +107,11 @@ public class Player extends Creature {
     /** Returns the number of bombs available. */
     public int getBombs() {
         return bombs;
+    }
+
+    /** Returns the number of hurricanes available. */
+    public int getHurricanes() {
+        return hurricanes;
     }
 
     /** Returns the number of lambs available. */

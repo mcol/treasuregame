@@ -16,6 +16,7 @@ import mcol.treasuregame.assets.creatures.Lamb;
 import mcol.treasuregame.assets.creatures.Player;
 import mcol.treasuregame.assets.items.ArmedBomb;
 import mcol.treasuregame.assets.items.Item;
+import mcol.treasuregame.assets.items.MovingHurricane;
 import mcol.treasuregame.assets.items.TargetIndicator;
 import mcol.treasuregame.gfx.HUD;
 
@@ -95,6 +96,12 @@ public class PlayState extends State {
         player.removeBomb();
     }
 
+    /** Releases a hurricane. */
+    private void releaseHurricane() {
+        itemManager.add(new MovingHurricane(player.getX(), player.getY()));
+        player.removeHurricane();
+    }
+
     /** Releases a lamb. */
     private void releaseLamb() {
         Lamb lamb = new Lamb(player.getX(), player.getY(), map);
@@ -109,6 +116,8 @@ public class PlayState extends State {
         hud.update();
         if (hud.isHoldingBomb())
             armBomb();
+        if (hud.isHoldingHurricane())
+            releaseHurricane();
         if (hud.isHoldingLamb())
             releaseLamb();
 

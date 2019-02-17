@@ -26,6 +26,7 @@ public class HUD implements Disposable {
 
     /** Buttons in the HUD. */
     private UIButton playButton;
+    private UIButton hurrButton;
     private UIButton bombButton;
     private UIButton lambButton;
 
@@ -41,6 +42,7 @@ public class HUD implements Disposable {
 
         playButton = new UIButton(Assets.buttonPlayTexture);
         bombButton = new UIButton(Assets.buttonBombTexture);
+        hurrButton = new UIButton(Assets.buttonHurrTexture);
         lambButton = new UIButton(Assets.buttonLambTexture);
         playButton.setChecked(true);
 
@@ -50,9 +52,12 @@ public class HUD implements Disposable {
         table.row();
         table.add(bombButton).padTop(3);
         table.row();
+        table.add(hurrButton).padTop(3);
+        table.row();
         table.add(lambButton).padTop(3);
         new ButtonGroup<>(playButton,
                           bombButton,
+                          hurrButton,
                           lambButton);
 
         // set the background
@@ -75,8 +80,10 @@ public class HUD implements Disposable {
     public void update() {
         playButton.setCount(player.getScore());
         bombButton.setCount(player.getBombs());
+        hurrButton.setCount(player.getHurricanes());
         lambButton.setCount(player.getLambs());
         bombButton.setDisabled(player.getBombs() == 0);
+        hurrButton.setDisabled(player.getHurricanes() == 0);
         lambButton.setDisabled(player.getLambs() == 0);
     }
 
@@ -108,6 +115,11 @@ public class HUD implements Disposable {
     /** Returns whether the bomb button is active. */
     public boolean isHoldingBomb() {
         return bombButton.isChecked();
+    }
+
+    /** Returns whether the hurricane button is active. */
+    public boolean isHoldingHurricane() {
+        return hurrButton.isChecked();
     }
 
     /** Returns whether the lamb button is active. */
