@@ -154,6 +154,7 @@ public class PlayState extends State {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        camera.resize(width, height);
         hud.resize(width, height);
     }
 

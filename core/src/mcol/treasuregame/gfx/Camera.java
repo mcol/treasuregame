@@ -15,6 +15,9 @@ public class Camera extends OrthographicCamera {
     /** Height of the world in world units. */
     private float worldHeight;
 
+    /** Boundaries for the camera position. */
+    private float left, right, bottom, top;
+
     /** Constructor. */
     public Camera() {
         target = new Vector3();
@@ -36,10 +39,8 @@ public class Camera extends OrthographicCamera {
 
         // check the map bounds to avoid showing blank space outside of the map
         target = pos.cpy();
-        target.x = MathUtils.clamp(target.x, viewportWidth / 2 * zoom,
-                                   worldWidth - viewportWidth / 2 * zoom);
-        target.y = MathUtils.clamp(target.y, viewportHeight / 2 * zoom,
-                                   worldHeight - viewportHeight / 2 * zoom);
+        target.x = MathUtils.clamp(target.x, left, right);
+        target.y = MathUtils.clamp(target.y, bottom, top);
 
         // move gradually towards the target
         float tween = 4f;
@@ -57,5 +58,13 @@ public class Camera extends OrthographicCamera {
     public void setWorldSize(float worldWidth, float worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
+    }
+
+    @SuppressWarnings("unused")
+    public void resize(int width, int height) {
+        left = viewportWidth / 2 * zoom;
+        right = worldWidth - left;
+        bottom = viewportHeight / 2 * zoom;
+        top = worldHeight - bottom;
     }
 }
