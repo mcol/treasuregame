@@ -1,12 +1,15 @@
 package mcol.treasuregame.gfx;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import mcol.treasuregame.assets.Assets;
@@ -15,17 +18,11 @@ import mcol.treasuregame.assets.creatures.Player;
 
 public class HUD implements Disposable {
 
-    /** Format string for the score. */
-    private static final String scoreFormat = "Score: %3d";
-
     /** Scene graph for the HUD information. */
     private final Stage stage;
 
     /** The player object. */
     private final Player player;
-
-    /** Label reporting the current score. */
-    private Label scoreLabel;
 
     /** Buttons in the HUD. */
     private UIButton playButton;
@@ -42,49 +39,58 @@ public class HUD implements Disposable {
     /** Creates the user interface. */
     private void createUI() {
 
-        // labels
-        Label.LabelStyle labelStyle = new Label.LabelStyle(new Font(16).get(),
-                                                           Color.WHITE);
-        scoreLabel = new Label(String.format(scoreFormat, 0), labelStyle);
-
         playButton = new UIButton(Assets.buttonPlayTexture);
         bombButton = new UIButton(Assets.buttonBombTexture);
         lambButton = new UIButton(Assets.buttonLambTexture);
         playButton.setChecked(true);
 
         // table to organize the buttons
-        Table btns = new Table().padTop(20);
-        btns.add(playButton).padRight(2);
-        btns.add(bombButton).padRight(2);
-        btns.add(lambButton);
+        Table table = new Table();
+        table.add(playButton);
+        table.row();
+        table.add(bombButton).padTop(3);
+        table.row();
+        table.add(lambButton).padTop(3);
         new ButtonGroup<>(playButton,
                           bombButton,
                           lambButton);
 
-        // table to organize the labels
-        Table table = new Table().right().padRight(20);
-        table.setFillParent(true);
-        table.add(scoreLabel).padTop(20);
-        table.row();
-        table.add(btns);
+        // set the background
+        table.setWidth(playButton.getPrefWidth() + 20);
+        table.setHeight(Gdx.graphics.getHeight());
+        table.setX(Gdx.graphics.getWidth() - table.getWidth());
+        table.setBackground(new NinePatchDrawable(Assets.buttonPatch));
 
+        // ignore inputs over the table background area
+        table.setTouchable(Touchable.enabled);
+        table.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
         stage.addActor(table);
     }
 
-    /** Reassigns the active mode to the player. */
-    public void resetCheckedButton() {
-        playButton.setChecked(true);
+    public void update() {
+        playButton.setCount(player.getScore());
+        bombButton.setCount(player.getBombs());
+        lambButton.setCount(player.getLambs());
+        bombButton.setDisabled(player.getBombs() == 0);
+        lambButton.setDisabled(player.getLambs() == 0);
     }
 
     public void render() {
-        bombButton.setDisabled(player.getBombs() == 0);
-        lambButton.setDisabled(player.getLambs() == 0);
+        playButton.setChecked(true);
         stage.act();
         stage.draw();
     }
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+        Table table = (Table) stage.getActors().first();
+        table.setHeight(Gdx.graphics.getHeight());
+        table.setX(Gdx.graphics.getWidth() - table.getWidth());
     }
 
     @Override
@@ -97,11 +103,6 @@ public class HUD implements Disposable {
     /** Returns the stage. */
     public Stage getStage() {
         return stage;
-    }
-
-    /** Sets the current score. */
-    public void setScore() {
-        scoreLabel.setText(String.format(scoreFormat, player.getScore()));
     }
 
     /** Returns whether the bomb button is active. */

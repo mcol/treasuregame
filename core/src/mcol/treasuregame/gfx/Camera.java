@@ -62,8 +62,9 @@ public class Camera extends OrthographicCamera {
 
     @SuppressWarnings("unused")
     public void resize(int width, int height) {
+        float hudWidth = 120 / (width / viewportWidth);
         left = viewportWidth / 2 * zoom;
-        right = worldWidth - left;
+        right = worldWidth - left + hudWidth * zoom;
         bottom = viewportHeight / 2 * zoom;
         top = worldHeight - bottom;
     }

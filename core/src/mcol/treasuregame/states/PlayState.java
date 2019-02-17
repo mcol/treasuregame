@@ -93,7 +93,6 @@ public class PlayState extends State {
     private void armBomb() {
         itemManager.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
-        hud.resetCheckedButton();
     }
 
     /** Releases a lamb. */
@@ -102,12 +101,12 @@ public class PlayState extends State {
         lamb.setTarget(itemManager);
         creatures.add(lamb);
         player.removeLamb();
-        hud.resetCheckedButton();
     }
 
     @Override
     protected void update(float dt) {
         handleInput();
+        hud.update();
         if (hud.isHoldingBomb())
             armBomb();
         if (hud.isHoldingLamb())
@@ -129,8 +128,6 @@ public class PlayState extends State {
 
         camera.update(dt, player.getPosition());
         targetIndicator.update(dt);
-
-        hud.setScore();
     }
 
     @Override

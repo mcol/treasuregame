@@ -3,6 +3,7 @@ package mcol.treasuregame.assets;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -25,6 +26,7 @@ public class Assets {
     public static TextureRegion[][] itemTexture;
     public static TextureRegion[][] lambTexture;
     public static TextureRegion[][] playTexture;
+    public static NinePatch buttonPatch;
 
     /** Container for all assets. */
     private static AssetManager assets;
@@ -45,6 +47,7 @@ public class Assets {
         assets.load("button-player.png", Texture.class);
         assets.load("explosion.png", Texture.class);
         assets.load("font.png", Texture.class);
+        assets.load("hud-bg.png", Texture.class);
         assets.load("hurricane.png", Texture.class);
         assets.load("items.png", Texture.class);
         assets.load("lamb.png", Texture.class);
@@ -67,9 +70,9 @@ public class Assets {
     /** Ensures that all assets have been loaded. */
     public void finishLoading() {
         assets.finishLoading();
-        buttonBombTexture = TextureRegion.split(assets.get("button-bomb.png", Texture.class), 32, 32)[0];
-        buttonLambTexture = TextureRegion.split(assets.get("button-lamb.png", Texture.class), 32, 32)[0];
-        buttonPlayTexture = TextureRegion.split(assets.get("button-player.png", Texture.class), 32, 32)[0];
+        buttonBombTexture = TextureRegion.split(assets.get("button-bomb.png", Texture.class), 100, 110)[0];
+        buttonLambTexture = TextureRegion.split(assets.get("button-lamb.png", Texture.class), 100, 110)[0];
+        buttonPlayTexture = TextureRegion.split(assets.get("button-player.png", Texture.class), 100, 110)[0];
         bombTexture = TextureRegion.split(assets.get("bomb.png", Texture.class), 16, 16)[0];
         explTexture = TextureRegion.split(assets.get("explosion.png", Texture.class), 32, 32)[0];
         fontTexture = TextureRegion.split(assets.get("font.png", Texture.class), 9, 9)[0];
@@ -78,6 +81,7 @@ public class Assets {
         lambTexture = TextureRegion.split(assets.get("lamb.png", Texture.class), 24, 21);
         playTexture = TextureRegion.split(assets.get("players.png", Texture.class), 32, 32);
         trgtTexture = TextureRegion.split(assets.get("target.png", Texture.class), 32, 32)[0];
+        buttonPatch = new NinePatch(assets.get("hud-bg.png", Texture.class), 5, 5, 5, 5);
     }
 
     /** Extracts an asset already loaded in the asset manager. */
