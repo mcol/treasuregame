@@ -90,8 +90,8 @@ public class PlayState extends State {
             game.setScreen(new MenuState(game, sb));
     }
 
-    /** Arms a bomb. */
-    private void armBomb() {
+    /** Releases a bomb. */
+    private void releaseBomb() {
         itemManager.add(new ArmedBomb(player.getX(), player.getY()));
         player.removeBomb();
     }
@@ -115,7 +115,7 @@ public class PlayState extends State {
         handleInput();
         hud.update();
         if (hud.isHoldingBomb())
-            armBomb();
+            releaseBomb();
         if (hud.isHoldingHurricane())
             releaseHurricane();
         if (hud.isHoldingLamb())
