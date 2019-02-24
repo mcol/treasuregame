@@ -92,7 +92,7 @@ public abstract class Creature {
     }
 
     /** Selects the current animation frame. */
-    private void selectCurrentFame() {
+    private void selectCurrentFrame() {
         float idx = moving ? stateTime : 0f;
         switch (dir) {
             case UP:
@@ -145,7 +145,7 @@ public abstract class Creature {
 
         currentTile = Utils.toTile(position);
         bounds.setPosition(position.x, position.y);
-        selectCurrentFame();
+        selectCurrentFrame();
     }
 
     public void render(Batch sb) {

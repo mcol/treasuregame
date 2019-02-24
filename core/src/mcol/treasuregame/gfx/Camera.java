@@ -34,7 +34,7 @@ public class Camera extends OrthographicCamera {
         }
     }
 
-    /** Moves the camera so that the target is at the target. */
+    /** Moves the camera so that the target is at the centre. */
     private void centreCamera(Vector3 pos, float dt) {
 
         // check the map bounds to avoid showing blank space outside of the map
