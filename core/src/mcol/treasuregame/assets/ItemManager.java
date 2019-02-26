@@ -94,4 +94,9 @@ public class ItemManager {
             coords.y = item.getY();
         }
     }
+
+    /** Returns the list of items. */
+    public List<Item> getItems() {
+        return items;
+    }
 }

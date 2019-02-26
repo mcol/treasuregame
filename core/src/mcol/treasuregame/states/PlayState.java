@@ -19,6 +19,7 @@ import mcol.treasuregame.assets.items.Item;
 import mcol.treasuregame.assets.items.MovingHurricane;
 import mcol.treasuregame.assets.items.TargetIndicator;
 import mcol.treasuregame.gfx.HUD;
+import mcol.treasuregame.gfx.MiniMap;
 
 import java.util.ArrayList;
 
@@ -62,7 +63,8 @@ public class PlayState extends State {
         itemManager = new ItemManager();
         creatures = new ArrayList<>();
         creatures.add(player);
-        hud = new HUD(sb, map, player);
+        MiniMap miniMap = new MiniMap(map, player, itemManager, creatures);
+        hud = new HUD(sb, miniMap, player);
         placeItems();
     }
 
@@ -113,7 +115,7 @@ public class PlayState extends State {
     @Override
     protected void update(float dt) {
         handleInput();
-        hud.update();
+        hud.update(dt);
         if (hud.isHoldingBomb())
             releaseBomb();
         if (hud.isHoldingHurricane())

@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import mcol.treasuregame.assets.Assets;
-import mcol.treasuregame.assets.Map;
 import mcol.treasuregame.assets.creatures.Player;
 
 public class HUD implements Disposable {
@@ -24,6 +23,9 @@ public class HUD implements Disposable {
     /** The player object. */
     private final Player player;
 
+    /** The minimap widget. */
+    private final MiniMap miniMap;
+
     /** Buttons in the HUD. */
     private UIButton playButton;
     private UIButton hurrButton;
@@ -31,7 +33,8 @@ public class HUD implements Disposable {
     private UIButton lambButton;
 
     /** Constructor. */
-    public HUD(Batch sb, Map map, Player player) {
+    public HUD(Batch sb, MiniMap miniMap, Player player) {
+        this.miniMap = miniMap;
         this.player = player;
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), sb);
         createUI();
@@ -55,6 +58,8 @@ public class HUD implements Disposable {
         table.add(hurrButton).padTop(3);
         table.row();
         table.add(lambButton).padTop(3);
+        table.row();
+        table.add(miniMap).padTop(5);
         new ButtonGroup<>(playButton,
                           bombButton,
                           hurrButton,
@@ -77,7 +82,7 @@ public class HUD implements Disposable {
         stage.addActor(table);
     }
 
-    public void update() {
+    public void update(float dt) {
         playButton.setCount(player.getScore());
         bombButton.setCount(player.getBombs());
         hurrButton.setCount(player.getHurricanes());
@@ -85,6 +90,7 @@ public class HUD implements Disposable {
         bombButton.setDisabled(player.getBombs() == 0);
         hurrButton.setDisabled(player.getHurricanes() == 0);
         lambButton.setDisabled(player.getLambs() == 0);
+        miniMap.update(dt);
     }
 
     public void render() {
