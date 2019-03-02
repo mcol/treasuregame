@@ -121,13 +121,9 @@ public class Map {
         showFog = !showFog;
     }
 
-    /** Sets the projection matrix from the given camera. */
-    public void setView(OrthographicCamera camera) {
-        mapRenderer.setView(camera);
-    }
-
     /** Renders the background layers. */
-    public void renderBackgroundLayers() {
+    public void renderBackgroundLayers(OrthographicCamera camera) {
+        mapRenderer.setView(camera);
         mapRenderer.render(backLayers);
     }
 

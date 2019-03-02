@@ -145,8 +145,7 @@ public class PlayState extends State {
     public void render(float delta) {
         super.render(delta);
 
-        map.setView(camera);
-        map.renderBackgroundLayers();
+        map.renderBackgroundLayers(camera);
         sb.begin();
         for (Creature creature : creatures)
             creature.render(sb);
