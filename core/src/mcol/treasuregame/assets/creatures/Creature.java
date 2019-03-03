@@ -93,7 +93,7 @@ public abstract class Creature {
 
     /** Selects the current animation frame. */
     private void selectCurrentFrame() {
-        float idx = moving ? stateTime : 0f;
+        float idx = moving ? stateTime : 0.15f;
         switch (dir) {
             case UP:
                 frame = up.getKeyFrame(idx);
