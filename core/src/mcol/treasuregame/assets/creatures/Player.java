@@ -1,7 +1,6 @@
 package mcol.treasuregame.assets.creatures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import mcol.treasuregame.TreasureGame;
 import mcol.treasuregame.assets.Assets;
 
@@ -34,16 +33,11 @@ public class Player extends Creature {
     /** Constructor. */
     public Player(float x, float y, int character) {
         super(x, y, SPEED, 1);
-        int row = character / 4 * 4;
-        int col = character % 4 * 3;
-        TextureRegion[] d = Assets.playTexture[row];
-        TextureRegion[] l = Assets.playTexture[row + 1];
-        TextureRegion[] r = Assets.playTexture[row + 2];
-        TextureRegion[] u = Assets.playTexture[row + 3];
-        dn = new Animation<>(ANIMATION_TIME, d[col], d[col + 1], d[col + 2]);
-        lt = new Animation<>(ANIMATION_TIME, l[col], l[col + 1], l[col + 2]);
-        rt = new Animation<>(ANIMATION_TIME, r[col], r[col + 1], r[col + 2]);
-        up = new Animation<>(ANIMATION_TIME, u[col], u[col + 1], u[col + 2]);
+        int row = character * 4;
+        dn = new Animation<>(ANIMATION_TIME, Assets.playTexture[row]);
+        lt = new Animation<>(ANIMATION_TIME, Assets.playTexture[row + 1]);
+        rt = new Animation<>(ANIMATION_TIME, Assets.playTexture[row + 2]);
+        up = new Animation<>(ANIMATION_TIME, Assets.playTexture[row + 3]);
         dn.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         lt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         rt.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
