@@ -3,7 +3,7 @@ package mcol.treasuregame.utils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.BinaryHeap;
 import com.badlogic.gdx.utils.BinaryHeap.Node;
-import mcol.treasuregame.assets.Map;
+import mcol.treasuregame.entities.Map;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import mcol.treasuregame.TreasureGame;
-import mcol.treasuregame.assets.Assets;
+import mcol.treasuregame.entities.Assets;
 import mcol.treasuregame.gfx.Background;
 
 public class MenuState extends State {

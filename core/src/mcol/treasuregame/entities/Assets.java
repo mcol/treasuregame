@@ -1,4 +1,4 @@
-package mcol.treasuregame.assets;
+package mcol.treasuregame.entities;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;

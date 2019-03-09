@@ -10,17 +10,14 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import mcol.treasuregame.assets.ItemManager;
-import mcol.treasuregame.assets.Map;
-import mcol.treasuregame.assets.creatures.Creature;
-import mcol.treasuregame.assets.creatures.Player;
-import mcol.treasuregame.assets.items.CollectableItem;
-import mcol.treasuregame.assets.items.Item;
+import mcol.treasuregame.entities.EntityManager;
+import mcol.treasuregame.entities.Map;
+import mcol.treasuregame.entities.components.MiniMappable;
+import mcol.treasuregame.entities.components.Position;
 import mcol.treasuregame.utils.Utils;
-
-import java.util.List;
 
 public class MiniMap extends Image {
 
@@ -33,14 +30,8 @@ public class MiniMap extends Image {
     /** The world map. */
     private final Map map;
 
-    /** The player object. */
-    private final Player player;
-
-    /** Container for all items. */
-    private final ItemManager items;
-
-    /** The list of creatures. */
-    private final List<Creature> creatures;
+    /** The entity manager. */
+    private final EntityManager em;
 
     /** Width of the world map in tiles. */
     private int mapWidth;
@@ -58,11 +49,11 @@ public class MiniMap extends Image {
     private FrameBuffer fb;
 
     /** Constructor. */
-    public MiniMap(Map map, Player player, ItemManager items, List<Creature> creatures) {
+    public MiniMap(Map map, EntityManager em) {
         this.map = map;
-        this.player = player;
-        this.items = items;
-        this.creatures = creatures;
+        this.em = em;
+        this.mapWidth = Utils.toTile(map.getWidth());
+        this.mapHeight = Utils.toTile(map.getHeight());
         initialize();
     }
 
@@ -87,7 +78,7 @@ public class MiniMap extends Image {
         batch.flush();
         fb.begin();
         Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-        render(items);
+        render();
         fb.end();
 
         batch.end();
@@ -99,7 +90,7 @@ public class MiniMap extends Image {
         blinker.update(dt);
     }
 
-    private void render(ItemManager items) {
+    public void render() {
 
         // background
         renderer.begin(ShapeType.Filled);
@@ -108,8 +99,10 @@ public class MiniMap extends Image {
         renderer.setColor(Color.BLACK);
         renderer.rect(0, 0, TILES, TILES);
 
-        int px = Utils.toTile(player.getX());
-        int py = Utils.toTile(player.getY());
+        // portion of the map to draw
+        Vector3 playerPosition = em.getComponent(em.getPlayer(), Position.class).getCurrent();
+        int px = Utils.toTile(playerPosition.x);
+        int py = Utils.toTile(playerPosition.y);
         int xmin = MathUtils.clamp(px - TILES / 2, -1, mapWidth - TILES + 1);
         int xmax = xmin + TILES;
         int ymin = MathUtils.clamp(py - TILES / 2, -1, mapHeight - TILES + 1);
@@ -140,23 +133,16 @@ public class MiniMap extends Image {
             }
         }
 
-        // creatures
-        for (Creature creature : creatures) {
-            renderer.setColor(creature instanceof Player ? Color.RED : Color.WHITE);
-            renderer.circle(Utils.toTile(creature.getX()) - xmin,
-                            Utils.toTile(creature.getY()) - ymin,
-                            creature instanceof Player ? 2 : 1);
-        }
-
-        // items
-        if (blinker.isVisible()) {
-            for (Item item : items.getItems()) {
-                renderer.setColor(item instanceof CollectableItem ? Color.GOLD : Color.BLUE);
-                int tx = Utils.toTile(item.getX());
-                int ty = Utils.toTile(item.getY());
-                if (!map.hasFog(tx, ty))
-                    renderer.circle(tx - xmin, ty - ymin, 1.5f);
-
+        // entities
+        for (long entity : em.getEntitiesWith(MiniMappable.class)) {
+            MiniMappable mm = em.getComponent(entity, MiniMappable.class);
+            Vector3 position = em.getComponent(entity, Position.class).getCurrent();
+            if (map.hasFog(position.x, position.y))
+                continue;
+            if (!mm.getBlinking() || blinker.isVisible()) {
+                renderer.setColor(mm.getColor());
+                renderer.circle(Utils.toTile(position.x) - xmin + 0.5f,
+                                Utils.toTile(position.y) - ymin + 0.5f, mm.getSize());
             }
         }
 

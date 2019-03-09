@@ -2,7 +2,7 @@ package mcol.treasuregame.gfx;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import mcol.treasuregame.TreasureGame;
-import mcol.treasuregame.assets.Assets;
+import mcol.treasuregame.entities.Assets;
 
 public class BitFont {
 

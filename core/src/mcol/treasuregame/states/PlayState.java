@@ -5,34 +5,27 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import mcol.treasuregame.TreasureGame;
-import mcol.treasuregame.assets.ItemFactory;
-import mcol.treasuregame.assets.ItemManager;
-import mcol.treasuregame.assets.Map;
-import mcol.treasuregame.assets.creatures.Creature;
-import mcol.treasuregame.assets.creatures.Lamb;
-import mcol.treasuregame.assets.creatures.Player;
-import mcol.treasuregame.assets.items.ArmedBomb;
-import mcol.treasuregame.assets.items.Item;
-import mcol.treasuregame.assets.items.MovingHurricane;
-import mcol.treasuregame.assets.items.TargetIndicator;
+import mcol.treasuregame.entities.EntityManager;
+import mcol.treasuregame.entities.Map;
+import mcol.treasuregame.entities.SystemManager;
+import mcol.treasuregame.entities.components.CameraComponent;
+import mcol.treasuregame.entities.components.Collectable;
+import mcol.treasuregame.entities.components.HUDComponent;
+import mcol.treasuregame.entities.components.Position;
+import mcol.treasuregame.entities.systems.NavigationSystem;
+import mcol.treasuregame.entities.systems.RenderSystem;
 import mcol.treasuregame.gfx.HUD;
 import mcol.treasuregame.gfx.MiniMap;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PlayState extends State {
 
-    /** Player object. */
-    private final Player player;
-
     /** Current level. */
     private final int level;
-
-    /** The target indicator. */
-    private final TargetIndicator targetIndicator;
 
     /** The world map. */
     private Map map;
@@ -40,17 +33,24 @@ public class PlayState extends State {
     /** Heads-up display. */
     private HUD hud;
 
-    /** Container for all items. */
-    private ItemManager itemManager;
+    /** Work vector. */
+    private final Vector3 coords = new Vector3();
 
-    /** Container for all creatures. */
-    private ArrayList<Creature> creatures;
+    private EntityManager entityManager;
+    private HUDComponent hudComponent;
+    private Vector3 playerPosition;
+    private long playerEntity;
+
+    /** System manager. */
+    private SystemManager systemManager;
+    private NavigationSystem navigationSystem;
+
+    /** Rendering system. */
+    private RenderSystem renderSystem;
 
     /** Constructor. */
     public PlayState(TreasureGame game, Batch sb) {
         super(game, sb);
-        player = new Player(12, 12, 0);
-        targetIndicator = new TargetIndicator(player);
         level = 0;
         initializeWorld(level);
         setupMultiplexer();
@@ -60,12 +60,26 @@ public class PlayState extends State {
     private void initializeWorld(int level) {
         map = new Map(sb, level);
         camera.setWorldSize(map.getWidth(), map.getHeight());
-        itemManager = new ItemManager();
-        creatures = new ArrayList<>();
-        creatures.add(player);
-        MiniMap miniMap = new MiniMap(map, player, itemManager, creatures);
-        hud = new HUD(sb, miniMap, player);
-        placeItems();
+        entityManager = new EntityManager();
+
+        // create the player
+        playerEntity = entityManager.getFactory().createPlayer(12, 12, 0);
+        entityManager.add(playerEntity, new CameraComponent(camera));
+        playerPosition = entityManager.getComponent(playerEntity, Position.class).getCurrent();
+        entityManager.getFactory().createTargetIndicator();
+
+        // create a hud component
+        hudComponent = new HUDComponent();
+        entityManager.add(entityManager.createEntity(), hudComponent);
+        hud = new HUD(sb, new MiniMap(map, entityManager), hudComponent);
+
+        // create entities for items
+        for (MapObject obj : map.getObjects())
+            entityManager.getFactory().createItem(obj.getProperties());
+
+        systemManager = new SystemManager(entityManager, map);
+        navigationSystem = new NavigationSystem(map);
+        renderSystem = new RenderSystem(entityManager, map);
     }
 
     /** Sets up the input processors. */
@@ -76,16 +90,6 @@ public class PlayState extends State {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    /** Extracts the items from the layer and puts them on the map. */
-    private void placeItems() {
-        MapObjects objects = map.getObjects();
-        for (MapObject obj : objects) {
-            Item item = ItemFactory.createItem(obj.getProperties());
-            if (item != null)
-                itemManager.add(item);
-        }
-    }
-
     /** Handles the input. */
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
@@ -94,22 +98,29 @@ public class PlayState extends State {
 
     /** Releases a bomb. */
     private void releaseBomb() {
-        itemManager.add(new ArmedBomb(player.getX(), player.getY()));
-        player.removeBomb();
+        entityManager.getFactory().createBomb(playerPosition.x, playerPosition.y);
+        hudComponent.setBombs(hudComponent.getBombs() - 1);
     }
 
     /** Releases a hurricane. */
     private void releaseHurricane() {
-        itemManager.add(new MovingHurricane(player.getX(), player.getY()));
-        player.removeHurricane();
+        entityManager.getFactory().createHurricane(playerPosition.x, playerPosition.y);
+        hudComponent.setHurricanes(hudComponent.getHurricanes() - 1);
     }
 
     /** Releases a lamb. */
     private void releaseLamb() {
-        Lamb lamb = new Lamb(player.getX(), player.getY(), map);
-        lamb.setTarget(itemManager);
-        creatures.add(lamb);
-        player.removeLamb();
+        List<Long> collectables = entityManager.getEntitiesWith(Collectable.class);
+        while (collectables.size() > 0) {
+            long entity = collectables.remove(MathUtils.random(collectables.size() - 1));
+            Vector3 target = entityManager.getComponent(entity, Position.class).getCurrent();
+            if (map.hasFog(target.x, target.y)) {
+                long lambEntity = entityManager.getFactory().createLamb(playerPosition.x, playerPosition.y);
+                navigationSystem.setTarget(entityManager, lambEntity, target);
+                hudComponent.setLambs(hudComponent.getLambs() - 1);
+                break;
+            }
+        }
     }
 
     @Override
@@ -123,22 +134,7 @@ public class PlayState extends State {
         if (hud.isHoldingLamb())
             releaseLamb();
 
-        // update all creatures
-        for (int i = 0; i < creatures.size(); i++) {
-            Creature creature = creatures.get(i);
-            creature.update(dt);
-            creature.destroy(map);
-            if (creature.shouldRemove())
-                creatures.remove(i);
-        }
-
-        // update all items
-        itemManager.checkCollisions(player);
-        itemManager.update(dt);
-        itemManager.destroy(map);
-
-        camera.update(dt, player.getPosition());
-        targetIndicator.update(dt);
+        systemManager.update(dt);
     }
 
     @Override
@@ -146,15 +142,7 @@ public class PlayState extends State {
         super.render(delta);
 
         map.renderBackgroundLayers(camera);
-        sb.begin();
-        for (Creature creature : creatures)
-            creature.render(sb);
-        itemManager.render(sb);
-        map.renderFog(sb);
-        player.renderMessages(sb);
-        targetIndicator.render(sb);
-        sb.end();
-
+        renderSystem.render(sb);
         hud.render();
     }
 
@@ -169,11 +157,8 @@ public class PlayState extends State {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        Vector3 coords = new Vector3(screenX, screenY, 0);
-        viewport.unproject(coords);
-
-        // transform screen coordinates to world coordinates
-        player.findPathToTarget(map, coords);
+        coords.set(screenX, screenY, 0f);
+        navigationSystem.setTarget(entityManager, playerEntity, viewport.unproject(coords));
         return false;
     }
 }

@@ -3,7 +3,7 @@ package mcol.treasuregame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import mcol.treasuregame.assets.Assets;
+import mcol.treasuregame.entities.Assets;
 import mcol.treasuregame.states.MenuState;
 
 public class TreasureGame extends Game {

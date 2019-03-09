@@ -12,16 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import mcol.treasuregame.assets.Assets;
-import mcol.treasuregame.assets.creatures.Player;
+import mcol.treasuregame.entities.Assets;
+import mcol.treasuregame.entities.components.HUDComponent;
 
 public class HUD implements Disposable {
 
     /** Scene graph for the HUD information. */
     private final Stage stage;
-
-    /** The player object. */
-    private final Player player;
 
     /** The minimap widget. */
     private final MiniMap miniMap;
@@ -32,10 +29,12 @@ public class HUD implements Disposable {
     private UIButton bombButton;
     private UIButton lambButton;
 
+    private final HUDComponent hudComponent;
+
     /** Constructor. */
-    public HUD(Batch sb, MiniMap miniMap, Player player) {
+    public HUD(Batch sb, MiniMap miniMap, HUDComponent hudComponent) {
         this.miniMap = miniMap;
-        this.player = player;
+        this.hudComponent = hudComponent;
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), sb);
         createUI();
     }
@@ -83,13 +82,13 @@ public class HUD implements Disposable {
     }
 
     public void update(float dt) {
-        playButton.setCount(player.getScore());
-        bombButton.setCount(player.getBombs());
-        hurrButton.setCount(player.getHurricanes());
-        lambButton.setCount(player.getLambs());
-        bombButton.setDisabled(player.getBombs() == 0);
-        hurrButton.setDisabled(player.getHurricanes() == 0);
-        lambButton.setDisabled(player.getLambs() == 0);
+        playButton.setCount(hudComponent.getScore());
+        bombButton.setCount(hudComponent.getBombs());
+        hurrButton.setCount(hudComponent.getHurricanes());
+        lambButton.setCount(hudComponent.getLambs());
+        bombButton.setDisabled(hudComponent.getBombs() == 0);
+        hurrButton.setDisabled(hudComponent.getHurricanes() == 0);
+        lambButton.setDisabled(hudComponent.getLambs() == 0);
         miniMap.update(dt);
     }
 
