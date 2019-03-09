@@ -12,7 +12,7 @@ public class UIButton extends Button {
     private String count;
 
     /** Constructor. */
-    UIButton(TextureRegion[] texture) {
+    public UIButton(TextureRegion[] texture) {
         Button.ButtonStyle style = new Button.ButtonStyle();
         style.up = new TextureRegionDrawable(texture[0]);
         style.down = new TextureRegionDrawable(texture[1]);
