@@ -35,7 +35,7 @@ public class TreasureGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		assets = new Assets();
+		assets = Assets.INSTANCE;
 		assets.getBackgroundImage();
 		setScreen(new MenuState(this, batch));
 		assets.finishLoading();
