@@ -27,17 +27,11 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
     /** Layers to be drawn in the background. */
     private val backLayers = intArrayOf(0, -1)
 
-    /** The texture used to render the fog. */
-    private val fogTexture = map.tileSets.getTileSet(0).getTile(FOG_TILE_ID).textureRegion
-
     /** Width of the map in tiles. */
     private val width: Int
 
     /** Height of the map in tiles. */
     private val height: Int
-
-    /** Whether the fog should be rendered. */
-    private var showFog: Boolean = true
 
     /** Returns the map objects. */
     val objects: MapObjects
@@ -97,24 +91,10 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
             obsCopy.setCell(tx + j % diameter, ty + j / diameter, null)
     }
 
-    /** Toggles visibility of the fog layer. */
-    fun toggleFogLayer() {
-        showFog = !showFog
-    }
-
     /** Renders the background layers. */
     fun renderBackgroundLayers() {
         mapRenderer.setView(camera)
         mapRenderer.render(backLayers)
-    }
-
-    /** Renders the fog layer. */
-    fun renderFog(sb: Batch) {
-        for (j in (if (showFog) 0 else fog.size) until fog.size) {
-            if (fog[j])
-                sb.draw(fogTexture, j % width * TreasureGame.TILESIZE, j / width * TreasureGame.TILESIZE,
-                        TreasureGame.TILESIZE, TreasureGame.TILESIZE)
-        }
     }
 
     /** Returns whether there is an obstacle at the given tile coordinates. */
@@ -140,10 +120,5 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
     /** Returns the height of the map in world units. */
     fun getHeight(): Float {
         return height * TreasureGame.TILESIZE
-    }
-
-    companion object {
-        /** Identifier of the tile used for fog. */
-        private const val FOG_TILE_ID = 35
     }
 }

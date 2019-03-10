@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils
 import mcol.treasuregame.entities.EntityManager
 import mcol.treasuregame.entities.Map
 import mcol.treasuregame.entities.components.BubbleMovement
+import mcol.treasuregame.entities.components.Light
 import mcol.treasuregame.entities.components.Position
 import mcol.treasuregame.entities.components.RandomMovement
 
@@ -38,6 +39,13 @@ class MovementSystem(private val map: Map) : GameSystem {
                 mov.xSpeed *= -1f
             if (position.y < -0.5 || position.y > map.getHeight() - 0.5)
                 mov.ySpeed *= -1f
+        }
+
+        // light flicker
+        for (entity in em.getEntitiesWith(Light::class.java)) {
+            val light = em.getComponent(entity, Light::class.java)
+            light.stateTime += dt
+            light.flickerSize = light.nextFlickerSize()
         }
     }
 }

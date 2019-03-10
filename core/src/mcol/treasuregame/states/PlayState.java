@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
@@ -48,6 +49,9 @@ public class PlayState extends State {
     /** Rendering system. */
     private RenderSystem renderSystem;
 
+    /** The shader program. */
+    protected ShaderProgram shader;
+
     /** Constructor. */
     public PlayState(TreasureGame game, Batch sb) {
         super(game, sb);
@@ -59,6 +63,8 @@ public class PlayState extends State {
     /** Initializes the world. */
     private void initializeWorld(int level) {
         map = new Map(sb, camera, level);
+        shader = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vert"),
+                                   Gdx.files.internal("shaders/lightmask.frag"));
         entityManager = new EntityManager();
 
         // create the player
@@ -78,7 +84,7 @@ public class PlayState extends State {
 
         systemManager = new SystemManager(entityManager, map);
         navigationSystem = new NavigationSystem(map);
-        renderSystem = new RenderSystem(entityManager, map);
+        renderSystem = new RenderSystem(entityManager, shader);
     }
 
     /** Sets up the input processors. */
@@ -132,15 +138,13 @@ public class PlayState extends State {
             releaseHurricane();
         if (hud.isHoldingLamb())
             releaseLamb();
-
         systemManager.update(dt);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        map.renderBackgroundLayers();
-        renderSystem.render(sb);
+        renderSystem.render(sb, map);
         hud.render();
     }
 
@@ -149,6 +153,15 @@ public class PlayState extends State {
         super.resize(width, height);
         camera.resize(width, height);
         hud.resize(width, height);
+        shader.begin();
+        shader.setUniformf("u_resolution", width, height);
+        shader.end();
+    }
+
+    @Override
+    public void show() {
+        if (!shader.isCompiled() || shader.getLog().length() > 0)
+            shader.getLog();
     }
 
     // InputProcessor interface

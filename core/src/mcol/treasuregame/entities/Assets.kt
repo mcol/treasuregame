@@ -18,6 +18,7 @@ object Assets {
     lateinit var menubg: Texture
     lateinit var iconTexture: Texture
     lateinit var exitTexture: Texture
+    lateinit var maskTexture: Texture
     lateinit var buttonBombTexture: Array<TextureRegion>
     lateinit var buttonHurrTexture: Array<TextureRegion>
     lateinit var buttonLambTexture: Array<TextureRegion>
@@ -50,6 +51,7 @@ object Assets {
         assets.load("hurricane.png", Texture::class.java)
         assets.load("items.png", Texture::class.java)
         assets.load("lamb.png", Texture::class.java)
+        assets.load("lightmask.png", Texture::class.java)
         assets.load("players.png", Texture::class.java)
         assets.load("target.png", Texture::class.java)
         assets.setLoader(TiledMap::class.java, TmxMapLoader(InternalFileHandleResolver()))
@@ -79,6 +81,7 @@ object Assets {
         hurrTexture = TextureRegion.split(assets.get("hurricane.png", Texture::class.java), 52, 52)[0]
         itemTexture = TextureRegion.split(assets.get("items.png", Texture::class.java), 32, 32)
         lambTexture = TextureRegion.split(assets.get("lamb.png", Texture::class.java), 24, 21)
+        maskTexture = assets.get("lightmask.png", Texture::class.java)
         playTexture = TextureRegion.split(assets.get("players.png", Texture::class.java), 32, 32)
         trgtTexture = TextureRegion.split(assets.get("target.png", Texture::class.java), 32, 32)[0]
         buttonPatch = NinePatch(assets.get("hud-bg.png", Texture::class.java), 5, 5, 5, 5)
