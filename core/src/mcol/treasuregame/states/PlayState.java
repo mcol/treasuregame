@@ -58,8 +58,7 @@ public class PlayState extends State {
 
     /** Initializes the world. */
     private void initializeWorld(int level) {
-        map = new Map(sb, level);
-        camera.setWorldSize(map.getWidth(), map.getHeight());
+        map = new Map(sb, camera, level);
         entityManager = new EntityManager();
 
         // create the player
@@ -140,8 +139,7 @@ public class PlayState extends State {
     @Override
     public void render(float delta) {
         super.render(delta);
-
-        map.renderBackgroundLayers(camera);
+        map.renderBackgroundLayers();
         renderSystem.render(sb);
         hud.render();
     }

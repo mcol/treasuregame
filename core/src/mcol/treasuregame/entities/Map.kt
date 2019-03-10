@@ -1,16 +1,16 @@
 package mcol.treasuregame.entities
 
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.maps.MapObjects
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import mcol.treasuregame.TreasureGame
+import mcol.treasuregame.gfx.Camera
 import mcol.treasuregame.utils.Utils
 import java.util.*
 
-class Map(sb: Batch, level: Int) {
+class Map(sb: Batch, val camera: Camera, level: Int) {
 
     /** The whole map. */
     private val map: TiledMap = Assets[String.format(Locale.US, "maps/%02d.tmx", level), TiledMap::class.java]
@@ -47,6 +47,7 @@ class Map(sb: Batch, level: Int) {
         val layer = map.layers.get(0) as TiledMapTileLayer
         width = layer.width
         height = layer.height
+        camera.setWorldSize(getWidth(), getHeight())
         val tileSize = TreasureGame.TILESIZE_PIXELS
         obsCopy = TiledMapTileLayer(width, height, tileSize,  tileSize)
         fog = BooleanArray(width * height) { true }
@@ -102,7 +103,7 @@ class Map(sb: Batch, level: Int) {
     }
 
     /** Renders the background layers. */
-    fun renderBackgroundLayers(camera: OrthographicCamera) {
+    fun renderBackgroundLayers() {
         mapRenderer.setView(camera)
         mapRenderer.render(backLayers)
     }
