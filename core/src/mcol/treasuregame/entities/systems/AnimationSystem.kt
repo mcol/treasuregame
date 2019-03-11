@@ -1,7 +1,11 @@
 package mcol.treasuregame.entities.systems
 
 import mcol.treasuregame.entities.EntityManager
-import mcol.treasuregame.entities.components.*
+import mcol.treasuregame.entities.components.AnimationComponent
+import mcol.treasuregame.entities.components.Appearance
+import mcol.treasuregame.entities.components.FacingDirection
+import mcol.treasuregame.entities.components.Velocity
+import mcol.treasuregame.entities.components.WalkingAnimation
 
 class AnimationSystem : GameSystem {
 

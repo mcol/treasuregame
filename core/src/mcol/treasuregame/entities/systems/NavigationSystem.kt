@@ -4,7 +4,13 @@ import com.badlogic.gdx.math.Vector3
 import mcol.treasuregame.TreasureGame
 import mcol.treasuregame.entities.EntityManager
 import mcol.treasuregame.entities.Map
-import mcol.treasuregame.entities.components.*
+import mcol.treasuregame.entities.components.Appearance
+import mcol.treasuregame.entities.components.CollisionBounds
+import mcol.treasuregame.entities.components.FacingDirection
+import mcol.treasuregame.entities.components.Navigation
+import mcol.treasuregame.entities.components.Position
+import mcol.treasuregame.entities.components.TargetIndicator
+import mcol.treasuregame.entities.components.Velocity
 import mcol.treasuregame.utils.PathFinder
 import mcol.treasuregame.utils.Utils
 
