@@ -65,10 +65,7 @@ class NavigationSystem(val map: Map) : GameSystem {
                 position.x += velocity.velocity.x
                 position.y += velocity.velocity.y
                 velocity.moving = true
-            }
-
-            if (velocity.moving) {
-                val offset = em.getComponent(entity, CollisionBounds::class.javaObjectType).offset
+                val offset = em.getComponent(entity, CollisionBounds::class.java).offset
                 bounds.setPosition(position.x + offset, position.y + offset)
             }
 
