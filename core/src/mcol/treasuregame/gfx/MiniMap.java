@@ -52,8 +52,6 @@ public class MiniMap extends Image {
     public MiniMap(Map map, EntityManager em) {
         this.map = map;
         this.em = em;
-        this.mapWidth = Utils.toTile(map.getWidth());
-        this.mapHeight = Utils.toTile(map.getHeight());
         initialize();
     }
 
