@@ -40,7 +40,7 @@ class CollisionSystem : GameSystem {
             }
         }
 
-        if (hudComponent.lambScore > hudComponent.lambCost) {
+        if (hudComponent.lambScore >= hudComponent.lambCost) {
             hudComponent.lambScore -= hudComponent.lambCost
             hudComponent.lambs++
         }
