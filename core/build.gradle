@@ -1,6 +1,5 @@
 apply plugin: "java"
 apply plugin: "kotlin"
-sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceSets.main.java.srcDirs = ["src/"]
 eclipse.project {
@@ -11,7 +10,7 @@ dependencies {
     compile files("build/classes/kotlin/main")
 }
 buildscript {
-    ext.kotlin_version = '1.3.21'
+    ext.kotlin_version = '1.3.30'
     repositories {
         mavenCentral()
     }
