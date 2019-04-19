@@ -20,9 +20,6 @@ public class TreasureGame extends Game {
     /** Size of each tile in pixels. */
     public static final int TILESIZE_PIXELS = 32;
 
-    /** Size of a tile in world units. */
-    public static final float TILESIZE = TILESIZE_PIXELS * SCALE;
-
     /** Name of the game. */
     public static final String TITLE = "TreasureGame";
 

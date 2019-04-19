@@ -83,7 +83,7 @@ class EntityFactory(private val em: EntityManager) {
         em.add(id, MiniMappable(Color.WHITE, 1f))
         em.add(id, Navigation(x, y))
         em.add(id, Position(x, y))
-        em.add(id, Velocity(3 * TreasureGame.TILESIZE))
+        em.add(id, Velocity(3f))
         em.add(id, WalkingAnimation(Assets.lambTexture[0], Assets.lambTexture[1],
                                     Assets.lambTexture[2], Assets.lambTexture[3],
                                     0.1f))
@@ -95,8 +95,7 @@ class EntityFactory(private val em: EntityManager) {
         em.add(id, BubbleMovement())
         em.add(id, Duration(2.5f))
         em.add(id, Message(msg))
-        em.add(id, Position(x + TreasureGame.TILESIZE * 0.5f,
-                            y + TreasureGame.TILESIZE))
+        em.add(id, Position(x + 0.5f, y))
     }
 
     fun createPlayer(x: Float, y: Float, character: Int): Long {
@@ -110,7 +109,7 @@ class EntityFactory(private val em: EntityManager) {
         em.add(id, MiniMappable(Color.RED, 2f))
         em.add(id, Navigation(x, y))
         em.add(id, Position(x, y))
-        em.add(id, Velocity(4 * TreasureGame.TILESIZE))
+        em.add(id, Velocity(4f))
         em.add(id, WalkingAnimation(Assets.playTexture[row],
                                     Assets.playTexture[row + 1],
                                     Assets.playTexture[row + 2],

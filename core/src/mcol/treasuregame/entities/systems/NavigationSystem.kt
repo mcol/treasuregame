@@ -1,7 +1,6 @@
 package mcol.treasuregame.entities.systems
 
 import com.badlogic.gdx.math.Vector3
-import mcol.treasuregame.TreasureGame
 import mcol.treasuregame.entities.EntityManager
 import mcol.treasuregame.entities.Map
 import mcol.treasuregame.entities.components.Appearance
@@ -20,11 +19,10 @@ class NavigationSystem(val map: Map) : GameSystem {
         val navigation = em.getComponent(entity, Navigation::class.java)
         val position = em.getComponent(entity, Position::class.java)
         navigation.targetTile.set(Utils.toTile(coords))
-        navigation.path = PathFinder.findPath(map, Utils.toTile(position.current), navigation.targetTile)
+        navigation.path = PathFinder.findPath(map, position.current, navigation.targetTile)
         val targetIndicator = em.getUniqueEntityWith(TargetIndicator::class.java)
         em.getComponent(targetIndicator, Position::class.java).current
           .set(navigation.targetTile)
-          .scl(TreasureGame.TILESIZE)
     }
 
     override fun update(em: EntityManager, dt: Float) {
@@ -45,8 +43,7 @@ class NavigationSystem(val map: Map) : GameSystem {
                 Math.abs(position.x - navigation.currentTarget.x) < MIN_STEP &&
                 Math.abs(position.y - navigation.currentTarget.y) < MIN_STEP)
                 navigation.currentTarget
-                          .set(navigation.path.removeAt(navigation.path.size - 1)
-                          .scl(TreasureGame.TILESIZE))
+                          .set(navigation.path.removeAt(navigation.path.size - 1))
 
             if (Math.abs(position.x - navigation.currentTarget.x) > MIN_STEP ||
                 Math.abs(position.y - navigation.currentTarget.y) > MIN_STEP) {

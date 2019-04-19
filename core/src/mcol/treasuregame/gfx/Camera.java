@@ -10,10 +10,10 @@ public class Camera extends OrthographicCamera {
     private Vector3 target;
 
     /** Width of the world in world units. */
-    private float worldWidth;
+    private int worldWidth;
 
     /** Height of the world in world units. */
-    private float worldHeight;
+    private int worldHeight;
 
     /** Boundaries for the camera position. */
     private float left, right, bottom, top;
@@ -55,7 +55,7 @@ public class Camera extends OrthographicCamera {
     // getters and setters
 
     /** Sets the dimensions of the world. */
-    public void setWorldSize(float worldWidth, float worldHeight) {
+    public void setWorldSize(int worldWidth, int worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
     }

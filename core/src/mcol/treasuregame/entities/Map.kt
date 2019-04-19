@@ -28,10 +28,10 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
     private val backLayers = intArrayOf(0, -1)
 
     /** Width of the map in tiles. */
-    private val width: Int
+    val width: Int
 
     /** Height of the map in tiles. */
-    private val height: Int
+    val height: Int
 
     /** Returns the map objects. */
     val objects: MapObjects
@@ -41,9 +41,9 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
         val layer = map.layers.get(0) as TiledMapTileLayer
         width = layer.width
         height = layer.height
-        camera.setWorldSize(getWidth(), getHeight())
+        camera.setWorldSize(width, height)
         val tileSize = TreasureGame.TILESIZE_PIXELS
-        obsCopy = TiledMapTileLayer(width, height, tileSize,  tileSize)
+        obsCopy = TiledMapTileLayer(width, height, tileSize, tileSize)
         fog = BooleanArray(width * height) { true }
         copyObstaclesLayer()
     }
@@ -110,15 +110,5 @@ class Map(sb: Batch, val camera: Camera, level: Int) {
     /** Returns whether there is fog at the given world coordinates. */
     fun hasFog(x: Float, y: Float): Boolean {
         return hasFog(Utils.toTile(x), Utils.toTile(y))
-    }
-
-    /** Returns the width of the map in world units. */
-    fun getWidth(): Float {
-        return width * TreasureGame.TILESIZE
-    }
-
-    /** Returns the height of the map in world units. */
-    fun getHeight(): Float {
-        return height * TreasureGame.TILESIZE
     }
 }

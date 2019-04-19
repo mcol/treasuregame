@@ -35,9 +35,9 @@ class MovementSystem(private val map: Map) : GameSystem {
             position.y += mov.ySpeed * dt
 
             // don't go outside of the map
-            if (position.x < -0.5 || position.x > map.getWidth() - 0.5)
+            if (position.x < -0.5 || position.x > map.width - 0.5)
                 mov.xSpeed *= -1f
-            if (position.y < -0.5 || position.y > map.getHeight() - 0.5)
+            if (position.y < -0.5 || position.y > map.height - 0.5)
                 mov.ySpeed *= -1f
         }
 

@@ -68,8 +68,8 @@ public class PathFinder {
     public static List<Vector3> findPath(Map map, Vector3 start, Vector3 target) {
         int iter = 0;
         int ttx = (int) target.x, tty = (int) target.y;
-        int width = Utils.toTile(map.getWidth());
-        int height = Utils.toTile(map.getHeight());
+        int width = map.getWidth();
+        int height = map.getHeight();
         PathNode current = new PathNode(start, null, heuristic(start, target), iter);
         PathNode currentBestNode = current;
         float currentBestCost = 10000000f;

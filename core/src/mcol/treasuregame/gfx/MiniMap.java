@@ -17,7 +17,6 @@ import mcol.treasuregame.entities.EntityManager;
 import mcol.treasuregame.entities.Map;
 import mcol.treasuregame.entities.components.MiniMappable;
 import mcol.treasuregame.entities.components.Position;
-import mcol.treasuregame.utils.Utils;
 
 public class MiniMap extends Image {
 
@@ -57,8 +56,8 @@ public class MiniMap extends Image {
 
     /** Set up the minimap. */
     private void initialize() {
-        mapWidth = Utils.toTile(map.getWidth());
-        mapHeight = Utils.toTile(map.getHeight());
+        mapWidth = map.getWidth();
+        mapHeight = map.getHeight();
         blinker = new Blinker(0.5f);
         renderer = new ShapeRenderer();
         renderer.scale((float) Gdx.graphics.getWidth() / TILES,
@@ -99,11 +98,9 @@ public class MiniMap extends Image {
 
         // portion of the map to draw
         Vector3 playerPosition = em.getComponent(em.getPlayer(), Position.class).getCurrent();
-        int px = Utils.toTile(playerPosition.x);
-        int py = Utils.toTile(playerPosition.y);
-        int xmin = MathUtils.clamp(px - TILES / 2, -1, mapWidth - TILES + 1);
+        int xmin = MathUtils.clamp((int) (playerPosition.x - TILES / 2), -1, mapWidth - TILES + 1);
         int xmax = xmin + TILES;
-        int ymin = MathUtils.clamp(py - TILES / 2, -1, mapHeight - TILES + 1);
+        int ymin = MathUtils.clamp((int) (playerPosition.y - TILES / 2), -1, mapHeight - TILES + 1);
         int ymax = ymin + TILES;
 
         // background
@@ -139,8 +136,8 @@ public class MiniMap extends Image {
                 continue;
             if (!mm.getBlinking() || blinker.isVisible()) {
                 renderer.setColor(mm.getColor());
-                renderer.circle(Utils.toTile(position.x) - xmin + 0.5f,
-                                Utils.toTile(position.y) - ymin + 0.5f, mm.getSize());
+                renderer.circle(position.x - xmin + 0.5f,
+                                position.y - ymin + 0.5f, mm.getSize());
             }
         }
 
