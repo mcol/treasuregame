@@ -15,18 +15,16 @@ class EntityFactory(private val em: EntityManager) {
         em.add(id, AnimationComponent(Assets.bombTexture, 0.2f,
                                       Animation.PlayMode.LOOP))
         em.add(id, Appearance())
-        em.add(id, Duration(1.2f, Explosion(3)))
+        em.add(id, Duration(1.2f, Explosion(x, y, 3)))
         em.add(id, MiniMappable(Color.BLACK, 1f))
         em.add(id, Position(x, y))
     }
 
     fun createExplosion(x: Float, y: Float, radius: Int) {
         val id = em.createEntity()
-        em.add(id, AnimationComponent(Assets.explTexture, 0.1f))
-        em.add(id, Appearance(size = SIZE * radius, offset = -radius / 2))
         em.add(id, Destructor(radius, fog = true, obstacles = true))
-        em.add(id, Duration(0.4f))
-        em.add(id, Light(6f))
+        em.add(id, Duration(4f))
+        em.add(id, Explosion(x, y, radius))
         em.add(id, Position(x, y))
         CameraShake.set(0.4f, 0.2f * radius)
     }

@@ -10,6 +10,7 @@ import mcol.treasuregame.entities.Assets
 import mcol.treasuregame.entities.EntityManager
 import mcol.treasuregame.entities.Map
 import mcol.treasuregame.entities.components.Appearance
+import mcol.treasuregame.entities.components.Explosion
 import mcol.treasuregame.entities.components.Light
 import mcol.treasuregame.entities.components.Message
 import mcol.treasuregame.entities.components.Position
@@ -69,6 +70,11 @@ class RenderSystem(private val em: EntityManager,
 
         sb.shader = null
         sb.setColor(1.0f, 1.0f, 1.0f, 1.0f)
+
+        for (entity in em.getEntitiesWith(Explosion::class.java)) {
+            val effect = em.getComponent(entity, Explosion::class.java).effect
+            effect.draw(sb, Gdx.graphics.deltaTime)
+        }
 
         for (entity in em.getEntitiesWith(TargetIndicator::class.java)) {
             val appearance = em.getComponent(entity, Appearance::class.java)

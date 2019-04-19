@@ -24,7 +24,6 @@ object Assets {
     lateinit var buttonLambTexture: Array<TextureRegion>
     lateinit var buttonPlayTexture: Array<TextureRegion>
     lateinit var bombTexture: Array<TextureRegion>
-    lateinit var explTexture: Array<TextureRegion>
     lateinit var fontTexture: Array<TextureRegion>
     lateinit var hurrTexture: Array<TextureRegion>
     lateinit var trgtTexture: Array<TextureRegion>
@@ -45,7 +44,6 @@ object Assets {
         assets.load("button-hurricane.png", Texture::class.java)
         assets.load("button-lamb.png", Texture::class.java)
         assets.load("button-player.png", Texture::class.java)
-        assets.load("explosion.png", Texture::class.java)
         assets.load("font.png", Texture::class.java)
         assets.load("hud-bg.png", Texture::class.java)
         assets.load("hurricane.png", Texture::class.java)
@@ -76,7 +74,6 @@ object Assets {
         buttonLambTexture = TextureRegion.split(assets.get("button-lamb.png", Texture::class.java), 100, 110)[0]
         buttonPlayTexture = TextureRegion.split(assets.get("button-player.png", Texture::class.java), 100, 110)[0]
         bombTexture = TextureRegion.split(assets.get("bomb.png", Texture::class.java), 16, 16)[0]
-        explTexture = TextureRegion.split(assets.get("explosion.png", Texture::class.java), 32, 32)[0]
         fontTexture = TextureRegion.split(assets.get("font.png", Texture::class.java), 9, 9)[0]
         hurrTexture = TextureRegion.split(assets.get("hurricane.png", Texture::class.java), 52, 52)[0]
         itemTexture = TextureRegion.split(assets.get("items.png", Texture::class.java), 32, 32)
